@@ -1,0 +1,36 @@
+
+/**
+ * Auth
+ */
+.auth-box {
+	padding: 0 30px;
+	width: 30%;
+}
+.auth-box .logo img {
+	height: 50px;
+}
+@media screen and (max-width: 1279px) {
+	.auth-box {
+		width: 60%; 
+	} 
+}
+@media screen and (max-width: 640px) {
+	.auth-box {
+		width: 90%; 
+	} 
+}
+
+
+
+.navbar-default .brand {
+	padding: 13px 39px;
+}
+
+.brand img.logo {
+	height: 54px;
+}
+
+
+.breadcrumb {
+	background-color: #fff;
+}

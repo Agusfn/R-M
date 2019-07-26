@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class RedirectIfAuthenticated
 {
     /**
-     * Handle an incoming request.
+     * Handle an incoming request. If logged as admin, redirect to admin home.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            return redirect()->route("admin.home");
         }
 
         return $next($request);
