@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    
     /**
      * Create a new controller instance.
      *
@@ -23,6 +25,40 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $topRated = Product::with("category:id,name")->inRandomOrder()->limit(9)->get();
+
+        $featured = Product::with("category:id,name")->inRandomOrder()->limit(9)->get();
+        $special = Product::with("category:id,name")->inRandomOrder()->limit(5)->get();
+        $onsale = Product::with("category:id,name")->inRandomOrder()->limit(5)->get();
+
+        return view('home')->with([
+            "featured" => $featured,
+            "special" => $special,
+            "onsale" => $onsale,
+            "topRated" => $topRated
+        ]);
     }
+
+
+    /**
+     * Show about us page.
+     * @return [type] [description]
+     */
+    public function aboutUs()
+    {
+        return view("about-us");
+    }
+
+
+    /**
+     * Show contact page.1
+     * @return [type] [description]
+     */
+    public function contact()
+    {
+        return view("contact");
+    }
+
+
+
 }

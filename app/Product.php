@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\ProductImage;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +10,31 @@ class Product extends Model
 {
     
 	protected $guarded = [];
+
+
+
+	/**
+	 * Generate a random unique product code with 6 digits.
+	 * @return int
+	 */
+	public static function generateCode()
+	{
+		$code = rand(100000, 999999);
+		if(self::where("code", $code)->count() > 0)
+			return self::generateCode();
+		else
+			return $code;
+	}
+
+
+	/**
+	 * Find a product with its code.
+	 * @return App\Product|null
+	 */
+	public static function findWithCode($code)
+	{
+		return self::where("code", $code)->first();
+	}
 
 
 
@@ -44,6 +70,19 @@ class Product extends Model
 			$this->main_img_path = null;
 
 		$this->save();
+	}
+
+
+	/**
+	 * Delete each image 
+	 * @return [type] [description]
+	 */
+	public function deleteAllImages()
+	{
+		foreach($this->images as $image) {
+			$image->delete();
+		}
+		Storage::deleteDirectory(ProductImage::IMG_DIR."/".$this->id);
 	}
 
 

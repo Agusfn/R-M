@@ -108,12 +108,13 @@ class ProductsController extends Controller
 		}
 
 
-		$product = Product::create($request->only([
-			"category_id",
-			"subcategory_id",
-			"name",
-			"description"
-		]));
+		$product = Product::create([
+			"code" => Product::generateCode(),
+			"category_id" => $request->category_id,
+			"subcategory_id" => $request->subcategory_id,
+			"name" => $request->name,
+			"description" => $request->description
+		]);
 
 		$orderedImgIds = json_decode($request->ordered_img_ids);
 
@@ -188,6 +189,22 @@ class ProductsController extends Controller
 
 
 		return redirect()->back();
+	}
+
+
+	/**
+	 * Delete a product with all its images from disk and db.
+	 * @param  [type] $productId [description]
+	 * @return [type]            [description]
+	 */
+	public function delete($productId)
+	{
+		$product = Product::findOrFail($productId);
+
+		$product->deleteAllImages();
+		$product->delete();
+
+		return redirect()->route("admin.products.list");
 	}
 
 

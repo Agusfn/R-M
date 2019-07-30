@@ -22,19 +22,20 @@
 
 					<div class="panel panel-headline">
 						<div class="panel-heading" style="padding-bottom: 10px">
-							<h3 class="panel-title">Categorías de productos</h3>
+							<h3 class="panel-title">
+								Categorías de productos
+								<div style="float: right">
+									<div class="btn-group">
+										<button class="btn btn-success" data-toggle="modal" data-target="#add_category_modal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar categoría</button>
+									</div>
+									<div class="btn-group">
+										<button id="reorder_btn" class="btn btn-info">Reordenar</button>
+										<button id="save_order_btn" class="btn btn-primary" style="display: none">Guardar orden</button>
+									</div>
+								</div>
+							</h3>
 						</div>
 						<div class="panel-body">
-
-							<div style="margin-bottom: 20px">
-								<div class="btn-group">
-									<button class="btn btn-success" data-toggle="modal" data-target="#add_category_modal">Agregar categoría</button>
-								</div>
-								<div class="btn-group">
-									<button id="reorder_btn" class="btn btn-info">Reordenar</button>
-									<button id="save_order_btn" class="btn btn-primary" style="display: none">Guardar orden</button>
-								</div>
-							</div>
 
 
 							<table class="table" id="categories_table">

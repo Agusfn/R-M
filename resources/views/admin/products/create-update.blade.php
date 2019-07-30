@@ -35,7 +35,15 @@
 					<div class="panel panel-headline">
 						<div class="panel-heading">
 							@if(isset($product))
-							<h3 class="panel-title">Modificar producto</h3>
+							<h3 class="panel-title">
+								Modificar producto
+								<div class="btn-group" style="float:right">
+									<form action="{{ url('admin/productos/'.$product->id.'/eliminar') }}" method="POST">
+										@csrf
+										<button type="button" class="btn btn-danger" onclick="if(confirm('¿Eliminar producto?')) $(this).parent().submit();">Eliminar producto</button>
+									</form>
+								</div>
+							</h3>
 							@else
 							<h3 class="panel-title">Agregar nuevo producto</h3>
 							@endif

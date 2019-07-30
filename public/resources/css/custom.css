@@ -1,0 +1,30 @@
+header .logo img {
+	width: 205px;
+}
+
+
+.product article .tittle {
+	height: 40px;
+	overflow: hidden;
+}
+
+
+
+
+.like-bnr {
+	background-size: cover;
+}
+
+.like-bnr:before {
+    content : "";
+    display: block;	
+	background-color:#000;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0.3;
+}
+
+.like-bnr h5, .like-bnr p, .like-bnr p span {
+	color: #F5F5F5;
+}

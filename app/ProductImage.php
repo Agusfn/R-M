@@ -150,6 +150,15 @@ class ProductImage extends Model
     }
 
 
+    /**
+     * Get the URL of the thumbnail image.
+     * @return string
+     */
+    public function thumbnailUrl()
+    {
+        return Storage::url($this->thumbnail_path);
+    }
+
 
     /**
      * Delete the images from disk, and the model itself.

@@ -37,16 +37,20 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($products as $product)
-									<tr>
-										<td><a class="btn btn-primary" href="{{ route('admin.products.details', $product->id) }}"><i class="fa fa-search-plus" aria-hidden="true"></i></a></td>
-										<td><img class="product-img" src="{{ $product->thumbnailUrl() }}"></td>
-										<td>{{ $product->id }}</td>
-										<td>{{ $product->name }}</td>
-										<td>{{ $product->category->name }} @if($product->subcategory) {{ ' > '.$product->subcategory->name }} @endif</td>
-										<td></td>
-									</tr>
-									@endforeach
+									@if($products->count() > 0)
+										@foreach($products as $product)
+										<tr>
+											<td><a class="btn btn-primary" href="{{ route('admin.products.details', $product->id) }}"><i class="fa fa-search-plus" aria-hidden="true"></i></a></td>
+											<td><img class="product-img" src="{{ $product->thumbnailUrl() }}"></td>
+											<td>{{ $product->id }}</td>
+											<td>{{ $product->name }}</td>
+											<td>{{ $product->category->name }} @if($product->subcategory) {{ ' > '.$product->subcategory->name }} @endif</td>
+											<td></td>
+										</tr>
+										@endforeach
+									@else
+										<tr><td colspan="5" style="text-align: center;">No hay productos</td></tr>
+									@endif
 								</tbody>
 							</table>
 						</div>

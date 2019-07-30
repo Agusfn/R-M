@@ -79,19 +79,20 @@
 
 					<div class="panel">
 						<div class="panel-heading" style="padding-bottom: 10px">
-							<h3 class="panel-title">Subcategorías</h3>
+							<h3 class="panel-title">
+								Subcategorías
+								<div style="float: right">
+									<div class="btn-group">
+										<button class="btn btn-success" data-toggle="modal" data-target="#add_subcategory_modal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar subcategoría</button>
+									</div>
+									<div class="btn-group">
+										<button id="reorder_btn" class="btn btn-info">Reordenar</button>
+										<button id="save_order_btn" class="btn btn-primary" style="display: none">Guardar orden</button>
+									</div>
+								</div>
+							</h3>
 						</div>
 						<div class="panel-body">
-
-							<div style="margin-bottom: 20px">
-								<div class="btn-group">
-									<button class="btn btn-success" data-toggle="modal" data-target="#add_subcategory_modal">Agregar subcategoría</button>
-								</div>
-								<div class="btn-group">
-									<button id="reorder_btn" class="btn btn-info">Reordenar</button>
-									<button id="save_order_btn" class="btn btn-primary" style="display: none">Guardar orden</button>
-								</div>
-							</div>
 
 							<table class="table" id="subcategories_table">
 								<thead>
