@@ -27,13 +27,25 @@ class Product extends Model
 	}
 
 
+	public function scopeWhereCategoryId($query, $categoryId)
+	{
+		return $query->where("category_id", $categoryId);
+	}
+
+	public function scopeWhereSubcategoryId($query, $subcategoryId)
+	{
+		return $query->where("subcategory_id", $subcategoryId);
+	}
+
+
+
 	/**
 	 * Find a product with its code.
 	 * @return App\Product|null
 	 */
-	public static function findWithCode($code)
+	public function scopeWhereCode($query, $code)
 	{
-		return self::where("code", $code)->first();
+		return $query->where("code", $code);
 	}
 
 
@@ -105,5 +117,29 @@ class Product extends Model
 		return Storage::url($this->main_img_path);
 	}
 	
+
+	/**
+	 * The URL of the product in the store.
+	 * @return [type] [description]
+	 */
+	public function url()
+	{
+		if($this->subcategory_id == null) {
+			return route('product-no-subcategory', [
+				$this->category->name_slug, 
+				$this->code, 
+				$this->name_slug
+			]);
+		}
+		else {
+			return route('product', [
+				$this->category->name_slug, 
+				$this->subcategory->name_slug,
+				$this->code, 
+				$this->name_slug
+			]);
+		}
+	}
+
     
 }

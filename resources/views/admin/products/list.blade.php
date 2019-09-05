@@ -1,5 +1,7 @@
 @extends('admin.layouts.main')
 
+@section('title', 'Productos')
+
 
 @section('custom-css')
 	<style type="text/css">

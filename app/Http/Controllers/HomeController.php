@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends StorefrontBaseController
 {
     
     /**
@@ -13,10 +13,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    /*public function __construct()
     {
+        //parent::__construct();
         //$this->middleware('auth');
-    }
+    }*/
 
     /**
      * Show the application dashboard.
@@ -25,11 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $topRated = Product::with("category:id,name")->inRandomOrder()->limit(9)->get();
+        $topRated = Product::with(["category","subcategory"])->limit(7)->get();
 
-        $featured = Product::with("category:id,name")->inRandomOrder()->limit(9)->get();
-        $special = Product::with("category:id,name")->inRandomOrder()->limit(5)->get();
-        $onsale = Product::with("category:id,name")->inRandomOrder()->limit(5)->get();
+        $featured = Product::with(["category","subcategory"])->inRandomOrder()->limit(9)->get();
+        $special = Product::with(["category","subcategory"])->inRandomOrder()->limit(5)->get();
+        $onsale = Product::with(["category","subcategory"])->inRandomOrder()->limit(5)->get();
 
         return view('home')->with([
             "featured" => $featured,

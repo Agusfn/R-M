@@ -2,7 +2,7 @@
 <html lang="en" class="fullscreen-bg">
 
 <head>
-	<title>Login | Klorofil - Free Bootstrap Dashboard Template</title>
+	<title>Login - Panel Admin R&M</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -17,8 +17,8 @@
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<!-- ICONS -->
-	<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('resources/admin/img/apple-icon.png') }}">
-	<link rel="icon" type="image/png" sizes="96x96" href="{{ asset('resources/admin/img/favicon.png') }}">
+	<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('favicon.ico') }}">
+	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 </head>
 
 <body>
@@ -59,9 +59,9 @@
 								</label>
 							</div>
 							<button type="submit" class="btn btn-primary btn-lg btn-block">INICIAR SESIÓN</button>
-							<div class="bottom">
+							{{--<div class="bottom">
 								<span class="helper-text"><i class="fa fa-lock"></i> <a href="#">¿Olvidó la contraseña?</a></span>
-							</div>
+							</div>--}}
 						</form>
 					</div>
 				</div>

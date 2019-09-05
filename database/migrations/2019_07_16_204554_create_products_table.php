@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('subcategory_id')->nullable();
             $table->string('name');
+            $table->string('name_slug');
             $table->text('description');
             $table->string('main_img_path')->nullable();
             $table->timestamps();

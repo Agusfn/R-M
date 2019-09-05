@@ -26,7 +26,11 @@ Route::post('admin/logout', 'Admin\Auth\LoginController@logout')->name('admin.lo
 Route::get("admin", "Admin\HomeController@index")->name("admin.home");
 
 
-
+/**
+ * Account
+ */
+Route::get("admin/cuenta", "Admin\AccountController@showForm")->name("admin.account");
+Route::post("admin/cuenta", "Admin\AccountController@updateAccount");
 
 /**
  * Products

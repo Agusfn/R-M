@@ -3343,7 +3343,7 @@ footer .social p a {
 	background: #83bb2b;
 	color: #fff;
 }
-.pagination li a {
+.pagination li a, .pagination li span{
 	border: 1px solid #eaeaea;
 	background: #fff;
 	height: 32px;

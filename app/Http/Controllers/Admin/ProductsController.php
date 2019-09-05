@@ -6,21 +6,16 @@ use App\Product;
 use App\Category;
 use App\Subcategory;
 use App\ProductImage;
+use App\Lib\Helpers\Strings;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class ProductsController extends Controller
+class ProductsController extends AdminBaseController
 {
     
-    public function __construct()
-    {
-    	$this->middleware("auth");
-    }
 
-
-
+    
     /**
      * List all products.
      * @return [type] [description]
@@ -113,6 +108,7 @@ class ProductsController extends Controller
 			"category_id" => $request->category_id,
 			"subcategory_id" => $request->subcategory_id,
 			"name" => $request->name,
+			"name_slug" => Strings::slugify($request->name),
 			"description" => $request->description
 		]);
 
@@ -178,6 +174,7 @@ class ProductsController extends Controller
 			"name",
 			"description"
 		]));
+		$product->name_slug = Strings::slugify($product->name);
 		$product->save();
 
 

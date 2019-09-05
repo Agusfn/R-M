@@ -3,11 +3,32 @@ header .logo img {
 }
 
 
+
+
+/** Color pallete theme (green-blue) ***/
+.cart-pop .itm-cont, .product-detail .product .sizes a.active, .week-sale-bnr .btn-round, .btn-round, 
+.featur-tabs .nav-tabs>li.active a, .featur-tabs .nav-tabs > li a:hover, .product article .sale-tag {
+	background-color: #43b347;
+}
+
+.product-detail .product .sizes a.active {
+	border: 1px solid #43b347;
+}
+
+/* Navbar */
+
+.nav .dropdown-menu .mega-inside .row li {
+	float: none
+}
+
+.nav .dropdown-menu .mega-inside .row > div > a {
+	padding: 0;
+}
+
 .product article .tittle {
 	height: 40px;
 	overflow: hidden;
 }
-
 
 
 
@@ -28,3 +49,8 @@ header .logo img {
 .like-bnr h5, .like-bnr p, .like-bnr p span {
 	color: #F5F5F5;
 }
+
+.no-arrow::before {
+	content:'' !important;
+}
+

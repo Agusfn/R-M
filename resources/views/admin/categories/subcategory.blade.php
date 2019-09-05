@@ -1,6 +1,6 @@
 @extends('admin.layouts.main')
 
-
+@section('title', $subcategory->category->name.' > '.$subcategory->name)
 
 @section('content')
 					

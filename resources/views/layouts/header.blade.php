@@ -1,74 +1,21 @@
-  <!-- Top bar -->
-  <div class="top-bar">
-    <div class="container">
-      <p>Welcome to SmartTech center!</p>
-      <div class="right-sec">
-        <ul>
-          <li><a href="#.">Login/Register </a></li>
-          <li><a href="#.">Store Location </a></li>
-          <li><a href="#.">FAQ </a></li>
-          <li><a href="#.">Newsletter </a></li>
-          <li>
-            <select class="selectpicker">
-              <option>French</option>
-              <option>German</option>
-              <option>Italian</option>
-              <option>Japanese</option>
-            </select>
-          </li>
-          <li>
-            <select class="selectpicker">
-              <option>(USD)Dollar</option>
-              <option>GBP</option>
-              <option>Euro</option>
-              <option>JPY</option>
-            </select>
-          </li>
-        </ul>
-        <div class="social-top"> <a href="#."><i class="fa fa-facebook"></i></a> <a href="#."><i class="fa fa-twitter"></i></a> <a href="#."><i class="fa fa-linkedin"></i></a> <a href="#."><i class="fa fa-dribbble"></i></a> <a href="#."><i class="fa fa-pinterest"></i></a> </div>
-      </div>
-    </div>
-  </div>
   
   <!-- Header -->
   <header>
     <div class="container">
       <div class="logo"> <a href="{{ route('home') }}"><img src="{{ asset('resources/images/logo.png') }}" alt="" ></a> </div>
       <div class="search-cate">
-        <select class="selectpicker">
-          <option> All Categories</option>
-          <option> Home Audio & Theater</option>
-          <option> TV & Video</option>
-          <option> Camera, Photo & Video</option>
-          <option> Cell Phones & Accessories</option>
-          <option> Headphones</option>
-          <option> Video Games</option>
-          <option> Bluetooth & Wireless </option>
-          <option> Gaming Console</option>
-          <option> Computers & Tablets</option>
-          <option> Monitors </option>
-        </select>
-        <input type="search" placeholder="Search entire store here...">
-        <button class="submit" type="submit"><i class="icon-magnifier"></i></button>
+        <form action="{{ route('search') }}" method="GET">
+          <select class="selectpicker" id="search-filter-category" {{ isset($categoryFiltered) ? 'name=categoria' : '' }}>
+            <option value=""> Todas las categorías</option>
+            @foreach($categories as $category)
+            <option value="{{ $category->name_slug }}" {{ (isset($categoryFiltered) && $categoryFiltered->id == $category->id) ? "selected" : "" }}>{{ $category->name }}</option>
+            @endforeach
+          </select>
+          <input type="search" name="q" placeholder="Buscar productos..." value="{{ request()->q ?: '' }}">
+          <button class="submit" type="submit"><i class="icon-magnifier"></i></button>
+        </form>
       </div>
-      
-      <!-- Cart Part -->
-      <ul class="nav navbar-right cart-pop">
-        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="itm-cont">3</span> <i class="flaticon-shopping-bag"></i> <strong>My Cart</strong> <br>
-          <span>3 item(s) - $500.00</span></a>
-          <ul class="dropdown-menu">
-            <li>
-              <div class="media-left"> <a href="#." class="thumb"> <img src="{{ asset('resources/images/item-img-1-1.jpg') }}" class="img-responsive" alt="" > </a> </div>
-              <div class="media-body"> <a href="#." class="tittle">Funda Para Ebook 7" 128GB full HD</a> <span>250 x 1</span> </div>
-            </li>
-            <li>
-              <div class="media-left"> <a href="#." class="thumb"> <img src="{{ asset('resources/images/item-img-1-2.jpg') }}" class="img-responsive" alt="" > </a> </div>
-              <div class="media-body"> <a href="#." class="tittle">Funda Para Ebook 7" full HD</a> <span>250 x 1</span> </div>
-            </li>
-            <li class="btn-cart"> <a href="#." class="btn-round">View Cart</a> </li>
-          </ul>
-        </li>
-      </ul>
+
     </div>
     
     <!-- Nav -->
@@ -76,41 +23,25 @@
       <div class="container"> 
         
         <!-- Categories -->
-        <div class="cate-lst"> <a  data-toggle="collapse" class="cate-style" href="#cater"><i class="fa fa-list-ul"></i> Our Categories </a>
+        <div class="cate-lst"> <a  data-toggle="collapse" class="cate-style" href="#cater"><i class="fa fa-list-ul"></i> Categorías </a>
           <div class="cate-bar-in">
             <div id="cater" class="collapse">
+
               <ul>
-                  <li><a href="#."> Home Audio & Theater</a></li>
-                  <li><a href="#."> TV & Video</a></li>
-                  <li><a href="#."> Camera, Photo & Video</a></li>
-                  <li class="sub-menu"><a href="#."> Cell Phones & Accessories</a>
-                    <ul>
-                      <li><a href="#."> TV & Video</a></li>
-                      <li><a href="#."> Camera, Photo & Video</a></li>
-                      <li><a href="#."> Cell Phones & Accessories</a>
-                    </ul>
-                  </li>
-                  <li><a href="#."> Headphones</a></li>
-                  <li><a href="#."> Video Games</a></li>
-                  <li class="sub-menu"><a href="#."> Bluetooth & Wireless Speakers</a>
-                    <ul>
-                      <li><a href="#."> TV & Video</a></li>
-                      <li><a href="#."> Camera, Photo & Video</a></li>
-                      <li><a href="#."> Cell Phones & Accessories</a>
-                    </ul>
-                  </li>
-                  <li class="sub-menu"><a href="#."> Gaming Console</a>
-                    <ul>
-                      <li><a href="#."> TV & Video</a></li>
-                      <li><a href="#."> Camera, Photo & Video</a></li>
-                      <li><a href="#."> Cell Phones & Accessories</a>
-                    </ul>
-                  </li>
-                  <li><a href="#."> Computers & Tablets</a></li>
-                  <li><a href="#."> Monitors</a></li>
-                  <li><a href="#."> Home Appliances</a></li>
-                  <li><a href="#."> Office Supplies</a></li>
-                </ul>
+                @foreach($categories as $category)
+                <li class="sub-menu {{ $category->subcategories->count() == 0 ? 'no-arrow' : '' }}"><a href="{{ route('category', $category->name_slug) }}"> {{ $category->name }}</a>
+                  
+                  @if($category->subcategories->count() > 0)
+                  <ul>
+                    @foreach($category->subcategories as $subcategory)
+                    <li><a href="{{ route('subcategory', [$category->name_slug, $subcategory->name_slug]) }}"> {{ $subcategory->name }}</a></li>
+                    @endforeach
+                  </ul>
+                  @endif
+                </li>
+                @endforeach
+              </ul>
+
             </div>
           </div>
         </div>
@@ -122,7 +53,106 @@
         <!-- NAV -->
         <div class="collapse navbar-collapse" id="nav-open-btn">
           <ul class="nav">
-            <li class="dropdown megamenu active"> <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Home </a>
+
+
+
+            <!-- Mega Menu Nav -->
+            <li class="dropdown megamenu"> <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Productos</a>
+              <div class="dropdown-menu animated-2s fadeInUpHalf">
+                <div class="mega-inside">
+                  <div class="top-lins">
+                    <ul>
+                      @foreach($categories as $category)
+                      <li><a href="{{ route('category', $category->name_slug) }}">{{ $category->name }}</a></li>
+                      @endforeach
+                      <li><a href="{{ route('search') }}">Todas las categorías</a></li>
+                    </ul>
+                  </div>
+                  <div class="row">
+
+                    @foreach($categories as $category)
+                      @if($loop->iteration >= 1 && $loop->iteration <= 2)
+                        @if($loop->iteration == 1)
+                        <div class="col-sm-3">
+                        @endif
+
+                        <a href="{{ route('category', $category->name_slug) }}"><h6>{{ $category->name }}</h6></a>
+
+                        @if($category->subcategories->count() > 0)
+                          <ul>
+                          @foreach($category->subcategories as $subcategory)
+                            <li><a href="{{ route('subcategory', [$category->name_slug, $subcategory->name_slug]) }}"> {{ $subcategory->name }}</a></li>
+                          @endforeach
+                          </ul>
+                        @endif
+
+                        @if($loop->iteration == 2)
+                        </div>
+                        @endif
+                      @endif
+                    @endforeach
+
+
+                    @foreach($categories as $category)
+                      @if($loop->iteration >= 3 && $loop->iteration <= 4)
+                        @if($loop->iteration == 3)
+                        <div class="col-sm-3">
+                        @endif
+
+                        <a href="{{ route('category', $category->name_slug) }}"><h6>{{ $category->name }}</h6></a>
+
+                        @if($category->subcategories->count() > 0)
+                          <ul>
+                          @foreach($category->subcategories as $subcategory)
+                            <li><a href="{{ route('subcategory', [$category->name_slug, $subcategory->name_slug]) }}"> {{ $subcategory->name }}</a></li>
+                          @endforeach
+                          </ul>
+                        @endif
+
+                        @if($loop->iteration == 4)
+                        </div>
+                        @endif
+                      @endif
+                    @endforeach
+
+
+                    @foreach($categories as $category)
+                      @if($loop->iteration >= 5 && $loop->iteration <= 5)
+                        @if($loop->iteration == 5)
+                        <div class="col-sm-2">
+                        @endif
+
+                        <a href="{{ route('category', $category->name_slug) }}"><h6>{{ $category->name }}</h6></a>
+
+                        @if($category->subcategories->count() > 0)
+                          <ul>
+                          @foreach($category->subcategories as $subcategory)
+                            <li><a href="{{ route('subcategory', [$category->name_slug, $subcategory->name_slug]) }}"> {{ $subcategory->name }}</a></li>
+                          @endforeach
+                          </ul>
+                        @endif
+
+                        @if($loop->iteration == 5)
+                        </div>
+                        @endif
+                      @endif
+                    @endforeach
+
+                    
+                    <div class="col-sm-4"> <img class=" nav-img" src="{{ asset('resources/images/navi-img.png') }}" alt="" > </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li> <a href="shop.html">Dónde estamos</a></li>
+
+            <li {{ request()->route()->getName() == 'contact' ? 'class=active' : "" }}> <a href="{{ route('contact') }}">Contacto</a></li>
+
+            <li {{ request()->route()->getName() == 'about-us' ? 'class=active' : "" }}> <a href="{{ route('about-us') }}">Nosotros</a></li>
+
+
+            <!--li class="dropdown megamenu active"> <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Home </a>
               <div class="dropdown-menu animated-2s fadeInUpHalf">
                 <div class="mega-inside scrn">
                   <ul class="home-links">
@@ -146,8 +176,8 @@
                   </ul>
                 </div>
               </div>
-            </li>
-            <li class="dropdown"> <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Pages </a>
+            </li-->
+            <!--li class="dropdown"> <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Pages </a>
               <ul class="dropdown-menu multi-level animated-2s fadeInUpHalf">
                 <li><a href="About.html"> About </a></li>
                 <li><a href="LoginForm.html"> Login Form </a></li>
@@ -168,80 +198,17 @@
                   </ul>
                 </li>
               </ul>
-            </li>
-            <!-- Mega Menu Nav -->
-            <li class="dropdown megamenu"> <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Mega menu </a>
-              <div class="dropdown-menu animated-2s fadeInUpHalf">
-                <div class="mega-inside">
-                  <div class="top-lins">
-                    <ul>
-                      <li><a href="#."> Cell Phones & Accessories </a></li>
-                      <li><a href="#."> Carrier Phones </a></li>
-                      <li><a href="#."> Unlocked Phones </a></li>
-                      <li><a href="#."> Prime Exclusive Phones </a></li>
-                      <li><a href="#."> Accessories </a></li>
-                      <li><a href="#."> Cases </a></li>
-                      <li><a href="#."> Best Sellers </a></li>
-                      <li><a href="#."> Deals </a></li>
-                      <li><a href="#."> All Electronics </a></li>
-                    </ul>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6>Electronics</h6>
-                      <ul>
-                        <li><a href="#."> Cell Phones & Accessories </a></li>
-                        <li><a href="#."> Carrier Phones </a></li>
-                        <li><a href="#."> Unlocked Phones </a></li>
-                        <li><a href="#."> Prime Exclusive Phones </a></li>
-                        <li><a href="#."> Accessories </a></li>
-                        <li><a href="#."> Cases </a></li>
-                        <li><a href="#."> Best Sellers </a></li>
-                        <li><a href="#."> Deals </a></li>
-                        <li><a href="#."> All Electronics </a></li>
-                      </ul>
-                    </div>
-                    <div class="col-sm-3">
-                      <h6>Computers</h6>
-                      <ul>
-                        <li><a href="#."> Computers & Tablets</a></li>
-                        <li><a href="#."> Monitors</a></li>
-                        <li><a href="#."> Laptops & tablets</a></li>
-                        <li><a href="#."> Networking</a></li>
-                        <li><a href="#."> Drives & Storage</a></li>
-                        <li><a href="#."> Computer Parts & Components</a></li>
-                        <li><a href="#."> Printers & Ink</a></li>
-                        <li><a href="#."> Office & School Supplies </a></li>
-                      </ul>
-                    </div>
-                    <div class="col-sm-2">
-                      <h6>Home Appliances</h6>
-                      <ul>
-                        <li><a href="#."> Refrigerators</a></li>
-                        <li><a href="#."> Wall Ovens</a></li>
-                        <li><a href="#."> Cooktops & Hoods</a></li>
-                        <li><a href="#."> Microwaves</a></li>
-                        <li><a href="#."> Dishwashers</a></li>
-                        <li><a href="#."> Washers</a></li>
-                      </ul>
-                    </div>
-                    <div class="col-sm-4"> <img class=" nav-img" src="{{ asset('resources/images/navi-img.png') }}" alt="" > </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="dropdown"> <a href="blog.html" class="dropdown-toggle" data-toggle="dropdown">Blog</a>
+            </li-->
+            <!--li class="dropdown"> <a href="blog.html" class="dropdown-toggle" data-toggle="dropdown">Blog</a>
               <ul class="dropdown-menu multi-level animated-2s fadeInUpHalf">
                 <li><a href="Blog.html">Blog </a></li>
                 <li><a href="Blog_details.html">Blog Single </a></li>
               </ul>
-            </li>
-            <li> <a href="shop.html">Buy theme! </a></li>
+            </li-->
+
           </ul>
         </div>
         
-        <!-- NAV RIGHT -->
-        <div class="nav-right"> <span class="call-mun"><i class="fa fa-phone"></i> <strong>Hotline:</strong> (+100) 123 456 7890</span> </div>
       </div>
     </nav>
   </header>

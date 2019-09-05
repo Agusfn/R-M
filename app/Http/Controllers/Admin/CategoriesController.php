@@ -4,18 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 
-class CategoriesController extends Controller
+class CategoriesController extends AdminBaseController
 {
     
-    public function __construct()
-    {
-    	$this->middleware("auth");
-    }
-
     	
     /**
      * Display a list of all the categories.
@@ -144,8 +138,10 @@ class CategoriesController extends Controller
 			return redirect()->back()->withErrors("La categoría posee subcategorías, no es posible eliminar sin que se eliminen las subcategorías primero.", "delete");
 		}
 
-		// add validation if products exist
-
+		if($category->products()->count() > 0) {
+			return redirect()->back()->withErrors("Esta subcategoría tiene productos existentes, cambia las categorías o elimina los productos primero.", "delete");
+		}
+		
 		$category->delete();
 
 		return redirect()->route("admin.categories.list");

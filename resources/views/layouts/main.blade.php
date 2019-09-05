@@ -8,8 +8,8 @@
 <title>@yield('title') - R&M Papelera</title>
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="{{ asset('resources/images/favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ asset('resources/images/favicon.ico') }}" type="image/x-icon">
+<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
 <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/rs-plugin/css/settings.css') }}" media="screen" />
@@ -22,7 +22,6 @@
 <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('resources/css/responsive.css') }}">
 <link rel="stylesheet" href="{{ asset('resources/css/custom.css') }}">
-<link rel="stylesheet" href="{{ asset('resources/css/azul-naranja.css') }}">
 
 @yield('custom-css')
 

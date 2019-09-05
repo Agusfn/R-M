@@ -1,5 +1,9 @@
 @extends('admin.layouts.main')
 
+
+@section('title', 'Categoría '.$category->name)
+
+
 @section('custom-css')
 <link rel="stylesheet" type="text/css" href="{{ asset('resources/admin/vendor/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}">
 
@@ -211,6 +215,11 @@ $(document).ready(function() {
 		var orderedIds = JSON.stringify($("#subcategories_table tbody").sortable("toArray", {attribute: "data-subcategory-id"}));
 		$("input[name=ordered_subcategories_json]").val(orderedIds);
 		$("#reorder_subcategories_form").submit();
+	});
+
+
+	$("input[name=subcategory_name]").keyup(function() {
+		$("input[name=subcategory_name_slug]").val(slugify($(this).val()));
 	});
 
 });

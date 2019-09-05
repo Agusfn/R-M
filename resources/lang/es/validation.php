@@ -128,10 +128,10 @@ return [
 		],
 
 		'name_slug' => [
-			'url_slug' => 'El nombre de URL puede tener solo letras minúsculas y guiones.',
+			'url_slug' => 'El nombre de URL puede tener solo letras minúsculas, números y guiones.',
 		],
 		'subcategory_name_slug' => [
-			'url_slug' => 'El nombre de URL puede tener solo letras minúsculas y guiones.',
+			'url_slug' => 'El nombre de URL puede tener solo letras minúsculas, números y guiones.',
 		]
 	],
 	/*

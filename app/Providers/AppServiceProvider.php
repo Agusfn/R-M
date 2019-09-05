@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         Validator::extend('url_slug', function ($attribute, $value, $parameters, $validator) {
-            return preg_match("/^[a-z][a-z\-]{0,30}[a-z]$/", $value);
+            return preg_match("/^[a-z0-9][a-z0-9\-]{0,30}[a-z0-9]$/", $value);
         });
 
     }

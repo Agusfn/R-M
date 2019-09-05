@@ -6,10 +6,10 @@
   <div class="linking">
     <div class="container">
       <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">{{ $product->category->name }}</a></li>
+        <li><a href="{{ route('home') }}">Home</a></li>
+        <li><a href="{{ route('category', $product->category->name_slug) }}">{{ $product->category->name }}</a></li>
         @if($product->subcategory)
-        <li><a href="#">{{ $product->subcategory->name }}</a></li>
+        <li><a href="{{ route('subcategory', [$product->category->name_slug, $product->subcategory->name_slug]) }}">{{ $product->subcategory->name }}</a></li>
         @endif
         <li class="active">{{ $product->name }}</li>
       </ol>

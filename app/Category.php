@@ -26,6 +26,17 @@ class Category extends Model
             return $lastOrder+1;
     }
 
+    /**
+     * Obtain category by its slug name.
+     * @param  string $slug
+     * @return App\Category|null
+     */
+    public function scopeWhereSlug($query, $slug)
+    {
+        return $query->where("name_slug", $slug);
+    }
+
+
 
     /**
      * Get all categories with their nested subcategories.
@@ -53,6 +64,10 @@ class Category extends Model
     	return $this->hasMany("App\Subcategory");
     }
 
+    public function products()
+    {
+        return $this->hasMany("App\Product");
+    }
 
 
     /**

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-
+@section('title', 'Inicio')
 
 @section('content')
 <section class="slid-sec">
@@ -392,7 +392,7 @@
                         <h5>{{ $product->name }}</h5>
                         <p>Space Gray Aluminum Case
                           with Black/Volt Real Sport Band <span>38mm | 42mm</span> </p>
-                        <a href="#." class="btn-round">Ver detalles</a> </div>
+                        <a href="{{ $product->url() }}" class="btn-round">Ver detalles</a> </div>
                     </div>
                   </div>
                 @else

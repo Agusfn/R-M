@@ -5,14 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 
-class SubcategoriesController extends Controller
+class SubcategoriesController extends AdminBaseController
 {
     
-
 
 	/**
 	 * Create a new subcategory.
@@ -142,7 +140,9 @@ class SubcategoriesController extends Controller
 		$subcategory = Subcategory::findOrFail($subcategoryId);
 		$categoryId = $subcategory->category_id;
 
-		// add validation if products exist
+		if($subcategory->products()->count() > 0) {
+			return redirect()->back()->withErrors("Esta subcategoría tiene productos existentes, cambia las categorías o elimina los productos primero.", "delete");
+		}
 
 		$subcategory->delete();
 

@@ -1,5 +1,13 @@
 @extends('admin.layouts.main')
 
+
+@if(!isset($product))
+	@section('title', 'Agregar producto')
+@else
+	@section('title', $product->name)
+@endif
+
+
 @section('custom-css')
 	<link href="{{ asset('resources/admin/vendor/dropzone/min/dropzone.min.css') }}" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{{ asset('resources/admin/vendor/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}">
@@ -80,7 +88,7 @@
 													<option value="{{ $category->id }}" style="font-weight: bold" 
 														@if(old('category_id') == $category->id && !old('subcategory_id')) 
 														selected
-														@elseif(isset($product) && $product->id == $category->id && !$product->subcategory_id)
+														@elseif(isset($product) && $product->category_id == $category->id && !$product->subcategory_id)
 														selected
 														@endif
 														>
@@ -107,7 +115,7 @@
 			                                    <span class="help-block">{{ $message }}</span>
 			                                @enderror
 
-											<input type="hidden" name="subcategory_id" value="">
+											<input type="hidden" name="subcategory_id" value="{{ old('subcategory_id') ?: (isset($product) ? $product->subcategory_id : '') }}">
 										</div>
 
 										<div class="form-group @error('description') has-error @enderror">
