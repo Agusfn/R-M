@@ -5,12 +5,17 @@ namespace App;
 use App\ProductImage;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
+use CyrildeWit\EloquentViewable\Viewable;
+use CyrildeWit\EloquentViewable\Support\Period;
+use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
 
-class Product extends Model
+
+class Product extends Model implements ViewableContract
 {
-    
-	protected $guarded = [];
+    use Viewable;
 
+
+	protected $guarded = [];
 
 
 	/**
@@ -37,6 +42,21 @@ class Product extends Model
 		return $query->where("subcategory_id", $subcategoryId);
 	}
 
+
+	public function scopeWithCategory($query)
+	{
+		return $query->with(["category","subcategory"]);
+	}
+
+
+	/**
+	 * Ordenar por visitas en ultimas 2 semanas.
+	 * @param  [type] $query [description]
+	 * @return [type]        [description]
+	 */
+	public function scopeOrderByTopViews($query) {
+		return $query->orderByViews('desc', Period::pastDays(14));
+	}
 
 
 	/**
@@ -76,10 +96,16 @@ class Product extends Model
 	 */
 	public function setMainImage()
 	{
-		if($newImg = $this->images()->ordered()->first())
-			$this->main_img_path = $newImg->square_path;
-		else
+		if($newImg = $this->images()->ordered()->first()) {
+			$this->main_img_path = $newImg->path;
+			$this->main_img_square_path = $newImg->square_path;
+			$this->main_img_thumbnail_path = $newImg->thumbnail_path;
+		}
+		else {
 			$this->main_img_path = null;
+			$this->main_img_square_path = null;
+			$this->main_img_thumbnail_path = null;
+		}
 
 		$this->save();
 	}
@@ -99,22 +125,22 @@ class Product extends Model
 
 
 	/**
-	 * [mainImgUrl description]
+	 * Obtener imagen principal del producto.
 	 * @return [type] [description]
 	 */
 	public function imgUrl()
 	{
-
+		return Storage::url($this->main_img_path);
 	}
 
 
 	/**
-	 * [thumbnailUrl description]
+	 * Obtener url de miniatura (es cuadrada, pero mas chica que main_img_square_path)
 	 * @return [type] [description]
 	 */
 	public function thumbnailUrl()
 	{
-		return Storage::url($this->main_img_path);
+		return Storage::url($this->main_img_thumbnail_path);
 	}
 	
 
@@ -141,5 +167,26 @@ class Product extends Model
 		}
 	}
 
+
+	/**
+	 * Obtener colección de productos similares.
+	 * @return [type] [description]
+	 */
+	public function getSimilarProducts()
+	{
+		if($this->subcategory_id != null) {
+			$products = self::whereCategoryId($this->category_id)
+				->whereSubcategoryId($this->subcategory_id)
+				->where("id", "!=", $this->id)
+				->limit(10)->get();
+		}
+		else {
+			$products = self::scopeWhereCategoryId($this->category_id)
+				->where("id", "!=", $this->id)
+				->limit(10)->get();
+		}
+
+		return $products;
+	}
     
 }

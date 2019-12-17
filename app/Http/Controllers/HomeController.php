@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\CarouselItem;
 use Illuminate\Http\Request;
+use CyrildeWit\EloquentViewable\Support\Period;
 
 class HomeController extends StorefrontBaseController
 {
@@ -26,17 +28,27 @@ class HomeController extends StorefrontBaseController
      */
     public function index()
     {
-        $topRated = Product::with(["category","subcategory"])->limit(7)->get();
+        $carouselItems = CarouselItem::all();
+    
+        $embalajeFeatured = Product::withCategory()->where("category_id", 1)->OrderByTopViews()->limit(15)->get();
+        $polietilenoFeatured = Product::withCategory()->where("category_id", 2)->OrderByTopViews()->limit(15)->get();
+        $descartablesFeatured = Product::withCategory()->where("category_id", 3)->OrderByTopViews()->limit(15)->get();
+        $libreriaFeatured = Product::withCategory()->where("category_id", 4)->OrderByTopViews()->limit(15)->get();
+        $papeleriaFeatured = Product::withCategory()->where("category_id", 5)->OrderByTopViews()->limit(15)->get();
 
-        $featured = Product::with(["category","subcategory"])->inRandomOrder()->limit(9)->get();
-        $special = Product::with(["category","subcategory"])->inRandomOrder()->limit(5)->get();
-        $onsale = Product::with(["category","subcategory"])->inRandomOrder()->limit(5)->get();
+        $mostViewedProducts = Product::withCategory()->orderByViews('desc', Period::pastDays(14))->limit(9)->get();
+
+        $mostRecent = Product::withCategory()->orderBy("updated_at", "DESC")->limit(5)->get();
 
         return view('home')->with([
-            "featured" => $featured,
-            "special" => $special,
-            "onsale" => $onsale,
-            "topRated" => $topRated
+            "carouselItems" => $carouselItems,
+            "embalajeFeatured" => $embalajeFeatured,
+            "polietilenoFeatured" => $polietilenoFeatured,
+            "descartablesFeatured" => $descartablesFeatured,
+            "libreriaFeatured" => $libreriaFeatured,
+            "papeleriaFeatured" => $papeleriaFeatured,
+            "mostViewedProducts" => $mostViewedProducts,
+            "mostRecent" => $mostRecent
         ]);
     }
 

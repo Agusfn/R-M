@@ -6,7 +6,8 @@
               <!-- Content --> 
               <span class="tag">{{ $product->category->name }}</span> <a href="{{ $product->url() }}" class="tittle">{{ $product->name }}</a> 
               <!-- Reviews -->
-              <p class="rev"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> <i class="fa fa-star"></i> <span class="margin-left-10">5 Review(s)</span></p>
+              {{--<p class="rev"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> <i class="fa fa-star"></i> <span class="margin-left-10">5 Review(s)</span></p>
               <div class="price">$350.00 <span>$200.00</span></div>
-              <a href="#." class="cart-btn"><i class="icon-basket-loaded"></i></a> </article>
+              <a href="#." class="cart-btn"><i class="icon-basket-loaded"></i></a> --}}
+            </article>
           </div>

@@ -32,6 +32,33 @@ Route::get("admin", "Admin\HomeController@index")->name("admin.home");
 Route::get("admin/cuenta", "Admin\AccountController@showForm")->name("admin.account");
 Route::post("admin/cuenta", "Admin\AccountController@updateAccount");
 
+
+/**
+ * Cover pages
+ */
+Route::get("admin/portadas", "Admin\CoverImagesController@showOverview")->name("admin.covers.overview");
+
+Route::get("admin/portadas/navbar", "Admin\CoverImagesController@showNavbarFeaturedForm")->name("admin.covers.navbarfeatured");
+Route::post("admin/portadas/navbar", "Admin\CoverImagesController@changeNavbarFeatured");
+
+Route::get("admin/portadas/slider1", "Admin\CoverImagesController@showSliderOneFeaturedForm")->name("admin.covers.slider1featured");
+Route::post("admin/portadas/slider1", "Admin\CoverImagesController@changeSliderOneFeatured");
+
+Route::get("admin/portadas/slider2", "Admin\CoverImagesController@showSliderTwoFeaturedForm")->name("admin.covers.slider2featured");
+Route::post("admin/portadas/slider2", "Admin\CoverImagesController@changeSliderTwoFeatured");
+
+Route::get("admin/portadas/item-slider/agregar", "Admin\CoverImagesController@showAddCarouselItemForm")->name("admin.covers.carouselitem.create");
+Route::post("admin/portadas/item-slider/agregar", "Admin\CoverImagesController@addCarouselItem");
+Route::post("admin/portadas/item-slider/eliminar/{id}", "Admin\CoverImagesController@deleteCarouselItem")->name("admin.covers.carouselitem.delete");
+Route::get("admin/portadas/item-slider/editar/{id}", "Admin\CoverImagesController@showCarouselItemEditForm")->name("admin.covers.carouselitem.edit");
+Route::post("admin/portadas/item-slider/editar/{id}", "Admin\CoverImagesController@editCarouselItem");
+
+
+Route::get("admin/portadas/obtener_productos", "Admin\CoverImagesController@fetchProducts");
+
+
+
+
 /**
  * Products
  */

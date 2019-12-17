@@ -34,3 +34,58 @@
 .breadcrumb {
 	background-color: #fff;
 }
+
+
+
+
+/* Product picker */
+
+.product-picker-button {
+	padding: 20px 0;
+	text-align: center;
+	border: 1px solid #EEE;
+	cursor: pointer;
+}
+
+.product-picker-button:hover {
+	background-color: #F0F0F0;
+}
+
+.product-picker-button.disabled {
+	cursor: default;
+}
+
+.product-picker-button.disabled:hover {
+	cursor: not-allowed;
+	background-color: inherit;
+}
+
+.product-picker-selected {
+	margin-top: 10px;
+	border: 1px solid #eaeaea !important;
+	display: none
+}
+
+.product-picker-selected-img {
+	width: 100px
+}
+
+.product-picker-selected-change a.disabled {
+	color: inherit;
+}
+
+#product_pick_table tr {
+	cursor: pointer;
+}
+
+#product_pick_table tr td:nth-child(1) img {
+	width: 60px;
+}
+
+#product_pick_table tr td:nth-child(2) {
+	vertical-align: middle;
+}
+
+#product_pick_table tr:hover {
+	background-color: #F0F0F0;
+}

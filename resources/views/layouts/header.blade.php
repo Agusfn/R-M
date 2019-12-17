@@ -138,8 +138,25 @@
                       @endif
                     @endforeach
 
+                    @if($featuredItems->navbarFeatured)
+                    <div class="col-sm-4 nav-featured-item">
+                      <h6>Destacado</h6>
+
+                      @if($featuredItems->navbarFeatured->showActionBtn)
+                      <a href="{{ $featuredItems->navbarFeatured->buttonUrl }}">
+                      @endif
+
+                        @if($featuredItems->navbarFeatured->title)
+                        <div class="nav-featured-item-title">{{ $featuredItems->navbarFeatured->title }}</div>
+                        @endif
+                        <img class="nav-img" src="{{ $featuredItems->navbarFeatured->imgUrl() }}" alt="{{ $featuredItems->navbarFeatured->title ?? '' }}" >
+                      
+                      @if($featuredItems->navbarFeatured->showActionBtn)
+                      </a>
+                      @endif
+                    </div>
+                    @endif
                     
-                    <div class="col-sm-4"> <img class=" nav-img" src="{{ asset('resources/images/navi-img.png') }}" alt="" > </div>
                   </div>
                 </div>
               </div>
@@ -150,61 +167,6 @@
             <li {{ request()->route()->getName() == 'contact' ? 'class=active' : "" }}> <a href="{{ route('contact') }}">Contacto</a></li>
 
             <li {{ request()->route()->getName() == 'about-us' ? 'class=active' : "" }}> <a href="{{ route('about-us') }}">Nosotros</a></li>
-
-
-            <!--li class="dropdown megamenu active"> <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Home </a>
-              <div class="dropdown-menu animated-2s fadeInUpHalf">
-                <div class="mega-inside scrn">
-                  <ul class="home-links">
-                    <li><a href="index.html"><img class="img-responsive" src="{{ asset('resources/images/home-1.jpg') }}" alt="" > <span>Home Version 1</span></a></li>
-                    <li><a href="index-2.html"><img class="img-responsive" src="{{ asset('resources/images/home-2.jpg') }}" alt="" > <span>Home Version 2</span></a> </li>
-                    <li><a href="index-3.html"><img class="img-responsive" src="{{ asset('resources/images/home-3.jpg') }}" alt="" > <span>Home Version 3</span></a></li>
-                    <li><a href="index-4.html"><img class="img-responsive" src="{{ asset('resources/images/home-4.jpg') }}" alt="" > <span>Home Version 4</span></a></li>
-                    <li><a href="index-5.html"><img class="img-responsive" src="{{ asset('resources/images/home-5.jpg') }}" alt="" > <span>Home Version 5</span></a></li>
-                    <li><a href="index-6.html"><img class="img-responsive" src="{{ asset('resources/images/home-6.jpg') }}" alt="" > <span>Home Version 6</span></a></li>
-                    <li><a href="index-7.html"><img class="img-responsive" src="{{ asset('resources/images/home-7.jpg') }}" alt="" > <span>Home Version 7</span></a></li>
-                    <li><a href="index-8.html"><img class="img-responsive" src="{{ asset('resources/images/home-8.jpg') }}" alt="" > <span>Home Version 8</span></a></li>
-                    <li><a href="index-9.html"><img class="img-responsive" src="{{ asset('resources/images/home-9.jpg') }}" alt="" > <span>Home Version 9</span></a></li>
-                    <li><a href="index-10.html"><img class="img-responsive" src="{{ asset('resources/images/home-10.jpg') }}" alt="" > <span>Home Version 10</span></a></li>
-                    <li><a href="index-11.html"><img class="img-responsive" src="{{ asset('resources/images/home-11.jpg') }}" alt="" > <span>Home Version 11</span></a></li>
-                    <li><a href="index-12.html"><img class="img-responsive" src="{{ asset('resources/images/home-12.jpg') }}" alt="" > <span>Home Version 12</span></a></li>
-                    <li><a href="index-13.html"><img class="img-responsive" src="{{ asset('resources/images/home-13.jpg') }}" alt="" > <span>Home Version 13</span></a></li>
-                    <li><a href="index-14.html"><img class="img-responsive" src="{{ asset('resources/images/home-14.jpg') }}" alt="" > <span>Home Version 14</span></a></li>
-                    <li><a href="index-15.html"><img class="img-responsive" src="{{ asset('resources/images/home-15.jpg') }}" alt="" > <span>Home Version 15</span></a></li>
-                    <li><a href="index-16.html"><img class="img-responsive" src="{{ asset('resources/images/home-16.jpg') }}" alt="" > <span>Home Version 16</span></a></li>
-                    <li><a href="index-17.html"><img class="img-responsive" src="{{ asset('resources/images/home-17.jpg') }}" alt="" > <span>Home Version 17</span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </li-->
-            <!--li class="dropdown"> <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Pages </a>
-              <ul class="dropdown-menu multi-level animated-2s fadeInUpHalf">
-                <li><a href="About.html"> About </a></li>
-                <li><a href="LoginForm.html"> Login Form </a></li>
-                <li><a href="GridProducts_3Columns.html"> Products 3 Columns </a></li>
-                <li><a href="GridProducts_4Columns.html"> Products 4 Columns </a></li>
-                <li><a href="ListProducts.html"> List Products </a></li>
-                <li><a href="Product-Details.html"> Product Details </a></li>
-                <li><a href="ShoppingCart.html"> Shopping Cart</a></li>
-                <li><a href="PaymentMethods.html"> Payment Methods </a></li>
-                <li><a href="DeliveryMethods.html"> Delivery Methods</a></li>
-                <li><a href="Confirmation.html"> Confirmation </a></li>
-                <li><a href="CheckoutSuccessful.html"> Checkout Successful </a></li>
-                <li><a href="Error404.html"> Error404 </a></li>
-                <li><a href="contact.html"> Contact </a></li>
-                <li class="dropdown-submenu"><a href="#."> Dropdown Level </a>
-                  <ul class="dropdown-menu animated-2s fadeInRight">
-                    <li><a href="#.">Level 1</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li-->
-            <!--li class="dropdown"> <a href="blog.html" class="dropdown-toggle" data-toggle="dropdown">Blog</a>
-              <ul class="dropdown-menu multi-level animated-2s fadeInUpHalf">
-                <li><a href="Blog.html">Blog </a></li>
-                <li><a href="Blog_details.html">Blog Single </a></li>
-              </ul>
-            </li-->
 
           </ul>
         </div>

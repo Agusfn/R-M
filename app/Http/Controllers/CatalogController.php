@@ -6,6 +6,7 @@ use App\Product;
 use App\Category;
 use App\Subcategory;
 use Illuminate\Http\Request;
+use App\Lib\RecentlyViewedProducts;
 use Illuminate\Support\Facades\View;
 
 class CatalogController extends StorefrontBaseController
@@ -84,15 +85,22 @@ class CatalogController extends StorefrontBaseController
 
 
 
-
+	/**
+	 * Mostrar página de resultados de productos paginados y filtrados.
+	 * @param  Request $request  [description]
+	 * @param  [type]  $products [description]
+	 * @return [type]            [description]
+	 */
 	private function filterPaginateAndDisplay(Request $request, $products)
 	{
 		if($request->filled("q")) {
 			$products = $products->where("name", "like", "%".$request->q."%");
 		}
 
-		$products = $products->paginate(5);
+		$products = $products->paginate(9);
 
+		$recentlyViewed = Product::find(RecentlyViewedProducts::getIds());
+		View::share("recentlyViewed", $recentlyViewed);
 		
 		if($request->layout == "list")
 			return view("catalog.product-list")->with([
@@ -172,10 +180,19 @@ class CatalogController extends StorefrontBaseController
 		if(!$product)
 			return redirect()->route("home");
 
+		// Increment product view count
+		views($product)->delayInSession(10)->record();
+
+		// Add recently viewed product id to session
+		RecentlyViewedProducts::addProductId($product->id);
+
 		// Redirect to proper product route if slug is different
 		if($product->name_slug != $productSlug) {
 			return redirect()->to($product->url());
 		}
+
+		$recentlyViewed = Product::find(RecentlyViewedProducts::getIds());
+		View::share("recentlyViewed", $recentlyViewed);
 
 		return view("product")->with("product", $product);
 	}

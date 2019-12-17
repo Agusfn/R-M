@@ -1,6 +1,9 @@
 <?php
 namespace App\Lib\Helpers;
 
+use Intervention\Image\ImageManagerStatic as Image;
+
+
 class Images
 {
 
@@ -27,5 +30,25 @@ class Images
 
 		return $image;
 	}
+
+
+	/**
+	 * Load an image from an URL.
+	 * @param  [type] $url [description]
+	 * @return [type]      [description]
+	 */
+	public static function loadFromUrl($url) {
+
+		try {
+			return Image::make($url);
+		}
+		catch(\Exception $e) {
+			return false;
+		}
+
+	}
+
+
+
 
 }

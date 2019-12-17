@@ -24,4 +24,3 @@ Route::get("{category_slug}/{subcategory_slug}", "CatalogController@subcategory"
 
 Route::get("{category_slug}/{product_code}/{product_name_slug}", "CatalogController@productWithoutSubcat")->name("product-no-subcategory");
 Route::get("{category_slug}/{subcategory_slug}/{product_code}/{product_name_slug}", "CatalogController@product")->name("product");
-//Route::get("producto/{code}", "ProductController@details")->name("product.details");

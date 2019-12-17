@@ -3,11 +3,14 @@ header .logo img {
 }
 
 
-
+footer {
+	padding-top: 35px;
+}
 
 /** Color pallete theme (green-blue) ***/
 .cart-pop .itm-cont, .product-detail .product .sizes a.active, .week-sale-bnr .btn-round, .btn-round, 
-.featur-tabs .nav-tabs>li.active a, .featur-tabs .nav-tabs > li a:hover, .product article .sale-tag {
+.featur-tabs .nav-tabs>li.active a, .featur-tabs .nav-tabs > li a:hover, .product article .sale-tag, 
+.tp-caption .btn-round {
 	background-color: #43b347;
 }
 
@@ -54,3 +57,79 @@ header .logo img {
 	content:'' !important;
 }
 
+
+/* Nav */
+
+.nav-featured-item {
+	text-align: center;
+	position: relative;
+}
+
+.nav-featured-item h6 {
+	text-align: left;
+}
+
+.nav-featured-item-title {
+	position: absolute;
+	bottom: 0px;
+	color:
+	#F0F0F0;
+	padding: 10px;
+	background-color:
+	#3333337a;
+	width: 76%;
+	margin-left: 8%;
+	font-size: 16px;
+}
+
+.nav-featured-item img.nav-img {
+	width: 80%;
+	max-width: 300px;
+	margin-top: 5px !important;
+}
+
+
+
+/* main page */
+
+.week-sale-bnr p {
+	font-weight: 500;
+	color: rgb(249, 249, 249);
+	background-color: #0f0f0f9c;
+	padding: 5px;
+}
+
+
+.shipping-info {
+	padding-bottom: 40px;
+}
+
+.shipping-info li {
+	width: 33%;
+}
+
+.product article {
+	padding-bottom: 15px
+}
+
+.like-bnr {
+	min-height: 287px;
+}
+
+.item-col-5 .product {
+	min-height: 287px;
+}
+
+.main-tabs-sec .nav li a {
+	min-height: auto;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+
+
+/* Product page */
+
+.product-detail .product h5 {
+	margin-top: 15px
+}

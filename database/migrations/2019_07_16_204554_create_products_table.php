@@ -22,6 +22,8 @@ class CreateProductsTable extends Migration
             $table->string('name_slug');
             $table->text('description');
             $table->string('main_img_path')->nullable();
+            $table->string('main_img_square_path')->nullable();
+            $table->string('main_img_thumbnail_path')->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');
