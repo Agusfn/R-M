@@ -15,7 +15,7 @@ class ProductSeeder extends Seeder
 
             array(
                 "id" => 4,
-                "code" => 642852,
+                "code" => "642852",
                 "category_id" => 1, 
                 "subcategory_id" => 1, 
                 "name" => "Caja de Cartón Micro Corrugado Simple con Aletas", 
@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 5,
-                "code" => 971971,
+                "code" => "971971",
                 "category_id" => 1, 
                 "subcategory_id" => 1, 
                 "name" => "Caja A4 32X24X6,5cm", 
@@ -42,7 +42,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 6,
-                "code" => 432174,
+                "code" => "432174",
                 "category_id" => 1, 
                 "subcategory_id" => 1, 
                 "name" => "Caja para CDS 21X13X13", 
@@ -56,7 +56,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 7,
-                "code" => 184445,
+                "code" => "184445",
                 "category_id" => 1, 
                 "subcategory_id" => 4, 
                 "name" => "Rollo de Cartón Corrugado 1 x 25mts", 
@@ -70,7 +70,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 8,
-                "code" => 195685,
+                "code" => "195685",
                 "category_id" => 1, 
                 "subcategory_id" => 4, 
                 "name" => "Rollo de Cartón Corrugado 1,40 x 25mts", 
@@ -84,7 +84,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 9,
-                "code" => 182669,
+                "code" => "182669",
                 "category_id" => 1, 
                 "subcategory_id" => 3, 
                 "name" => "Film Stretch 10cm Cristal", 
@@ -98,7 +98,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 10,
-                "code" => 922623,
+                "code" => "922623",
                 "category_id" => 1, 
                 "subcategory_id" => 3, 
                 "name" => "Film Stretch 50cm Cristal", 
@@ -112,7 +112,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 11,
-                "code" => 537015,
+                "code" => "537015",
                 "category_id" => 1, 
                 "subcategory_id" => 2, 
                 "name" => "Cinta de Embalar 48mm x 80mts", 
@@ -126,7 +126,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 12,
-                "code" => 902590,
+                "code" => "902590",
                 "category_id" => 1, 
                 "subcategory_id" => 2, 
                 "name" => "Cinta Adhesiva FRAGIL 48mm x 40mts", 
@@ -140,7 +140,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 13,
-                "code" => 303055,
+                "code" => "303055",
                 "category_id" => 2, 
                 "subcategory_id" => 6, 
                 "name" => "Bolsas de Consorcio Baja Densidad 60x90cm x10 Flex", 
@@ -154,7 +154,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 14,
-                "code" => 623845,
+                "code" => "623845",
                 "category_id" => 2, 
                 "subcategory_id" => 6, 
                 "name" => "Bolsas Camiseta Negras Rolanplast Perla Negra Baja Densidad", 
@@ -168,7 +168,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 15,
-                "code" => 268785,
+                "code" => "268785",
                 "category_id" => 2, 
                 "subcategory_id" => 5, 
                 "name" => "Bolsas Plásticas Transparentes en Rollo de Arranque Inpla Alta Densidad", 
@@ -182,7 +182,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 16,
-                "code" => 857554,
+                "code" => "857554",
                 "category_id" => 2, 
                 "subcategory_id" => 5, 
                 "name" => "Bolsas de Consorcio Blancas 60x90cm x10 Inpla en Rollo", 
@@ -196,7 +196,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 17,
-                "code" => 739043,
+                "code" => "739043",
                 "category_id" => 3, 
                 "subcategory_id" => 8, 
                 "name" => "Bandejas de Aluminio Rectangulares", 
@@ -210,7 +210,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 18,
-                "code" => 482457,
+                "code" => "482457",
                 "category_id" => 3, 
                 "subcategory_id" => 7, 
                 "name" => "Vasos de Plástico Descartables Transparentes Bella Cup", 
@@ -224,7 +224,7 @@ class ProductSeeder extends Seeder
             ),
             array(
                 "id" => 19,
-                "code" => 692263,
+                "code" => "692263",
                 "category_id" => 3, 
                 "subcategory_id" => 9, 
                 "name" => "Platos Descartables Económicos", 

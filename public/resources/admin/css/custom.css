@@ -89,3 +89,10 @@
 #product_pick_table tr:hover {
 	background-color: #F0F0F0;
 }
+
+
+/**/
+
+.filter {
+	display: inline-block;
+}

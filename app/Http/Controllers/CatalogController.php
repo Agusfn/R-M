@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Lib\RecentlyViewedProducts;
 use Illuminate\Support\Facades\View;
 
+
 class CatalogController extends StorefrontBaseController
 {
     	
@@ -99,9 +100,6 @@ class CatalogController extends StorefrontBaseController
 
 		$products = $products->paginate(9);
 
-		$recentlyViewed = Product::find(RecentlyViewedProducts::getIds());
-		View::share("recentlyViewed", $recentlyViewed);
-		
 		if($request->layout == "list")
 			return view("catalog.product-list")->with([
 				"products" => $products,
@@ -120,18 +118,18 @@ class CatalogController extends StorefrontBaseController
 	/**
 	 * Display product (that belongs to a category but not a subcategory)
 	 * @param  [type] $category_slug     [description]
-	 * @param  [type] $product_code      [description]
+	 * @param  [type] $product_id      [description]
 	 * @param  [type] $product_name_slug [description]
 	 * @return [type]                    [description]
 	 */
-	public function productWithoutSubcat($category_slug, $product_code, $product_name_slug)
+	public function productWithoutSubcat($category_slug, $product_id, $product_name_slug)
 	{
 		$category = Category::whereSlug($category_slug)->first();
 
 		if(!$category)
 			return redirect()->route("home");
 
-		return $this->findProductAndGetResponse($category->id, null, $product_code, $product_name_slug);
+		return $this->findProductAndGetResponse($category->id, null, $product_id, $product_name_slug);
 	}
 
 
@@ -139,11 +137,11 @@ class CatalogController extends StorefrontBaseController
 	/**
 	 * Display product (that belongs to a category and a subcategory)
 	 * @param  [type] $category_slug     [description]
-	 * @param  [type] $product_code      [description]
+	 * @param  [type] $product_id      [description]
 	 * @param  [type] $product_name_slug [description]
 	 * @return [type]                    [description]
 	 */
-	public function product($category_slug, $subcategory_slug, $product_code, $product_name_slug)
+	public function product($category_slug, $subcategory_slug, $product_id, $product_name_slug)
 	{
 		$category = Category::whereSlug($category_slug)->first();
 
@@ -155,7 +153,7 @@ class CatalogController extends StorefrontBaseController
 		if(!$subcategory)
 			return redirect()->route("home");
 
-		return $this->findProductAndGetResponse($category->id, $subcategory->id, $product_code, $product_name_slug);
+		return $this->findProductAndGetResponse($category->id, $subcategory->id, $product_id, $product_name_slug);
 	}
 
 
@@ -164,17 +162,17 @@ class CatalogController extends StorefrontBaseController
 	 * Find a product with the category id, subcategory id, and code given. If it exists, return a response with the product page view.
 	 * @param  [type] $categoryId    [description]
 	 * @param  [type] $subCategoryId [description]
-	 * @param  [type] $productCode   [description]
+	 * @param  [type] $productId   [description]
 	 * @param  [type] $productSlug   [description]
 	 * @return [type]                [description]
 	 */
-	private function findProductAndGetResponse($categoryId, $subCategoryId, $productCode, $productSlug)
+	private function findProductAndGetResponse($categoryId, $subCategoryId, $productId, $productSlug)
 	{
 		
 		$product = Product::with(["category","subcategory"])
 			->whereCategoryId($categoryId)
 			->whereSubcategoryId($subCategoryId)
-			->whereCode($productCode)
+			->where("id", $productId)
 			->first();
 
 		if(!$product)
@@ -190,9 +188,6 @@ class CatalogController extends StorefrontBaseController
 		if($product->name_slug != $productSlug) {
 			return redirect()->to($product->url());
 		}
-
-		$recentlyViewed = Product::find(RecentlyViewedProducts::getIds());
-		View::share("recentlyViewed", $recentlyViewed);
 
 		return view("product")->with("product", $product);
 	}

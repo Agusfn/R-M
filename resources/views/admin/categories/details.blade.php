@@ -117,7 +117,7 @@
 											<td><i class="fa fa-bars handle" aria-hidden="true"></i></td>
 											<td>{{ $subcategory->name }}</td>
 											<td>{{ $subcategory->name_slug }}</td>
-											<td></td>
+											<td>{{ $subcategory->products()->count() }}</td>
 											<td><a href="{{ route('admin.subcategories.details', $subcategory->id) }}" class="btn btn-primary">Editar</a></td>
 										</tr>
 										@endforeach

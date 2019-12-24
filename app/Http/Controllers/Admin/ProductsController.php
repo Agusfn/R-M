@@ -9,6 +9,8 @@ use App\ProductImage;
 use App\Lib\Helpers\Strings;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Filters\ProductFilters;
+use App\Http\Requests\CreateProduct;
 use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends AdminBaseController
@@ -20,10 +22,18 @@ class ProductsController extends AdminBaseController
      * List all products.
      * @return [type] [description]
      */
-	public function list()
+	public function list(ProductFilters $filters)
 	{
-		$products = Product::with(["category", "subcategory"])->get();
-		return view("admin.products.list")->with("products", $products);
+		$categories = Category::ordered()->get();
+
+		$products = Product::with(["category", "subcategory"])
+		->filter($filters)
+		->paginate(15);
+
+		return view("admin.products.list")->with([
+			"products" => $products,
+			"categories" => $categories
+		]);
 	}
 
 
@@ -83,16 +93,10 @@ class ProductsController extends AdminBaseController
 	 * @param  Request $request [description]
 	 * @return [type]           [description]
 	 */
-	public function create(Request $request)
+	public function create(CreateProduct $request)
 	{
 		
-		$request->validate([
-			"ordered_img_ids" => "required|json",
-			"name" => "required",
-			"category_id" => "required|integer|exists:categories,id",
-			"subcategory_id" => "nullable|integer|exists:subcategories,id",
-			"description" => "required"
-		]);
+		$request->validated();
 
 		// check if subcategory belongs to category. If not, do not assign subcategory.
 		if($request->subcategory_id) {
@@ -104,7 +108,7 @@ class ProductsController extends AdminBaseController
 
 
 		$product = Product::create([
-			"code" => Product::generateCode(),
+			"code" => $request->code,
 			"category_id" => $request->category_id,
 			"subcategory_id" => $request->subcategory_id,
 			"name" => $request->name,
@@ -152,11 +156,12 @@ class ProductsController extends AdminBaseController
 		$product = Product::findOrFail($productId);
 
 		$request->validate([
-			"ordered_img_ids" => "required|json",
-			"name" => "required",
-			"category_id" => "required|integer|exists:categories,id",
-			"subcategory_id" => "nullable|integer|exists:subcategories,id",
-			"description" => "required"
+			"code" => "nullable|unique:products,code,".$product->id,
+            "ordered_img_ids" => "required|json",
+            "name" => "required",
+            "category_id" => "required|integer|exists:categories,id",
+            "subcategory_id" => "nullable|integer|exists:subcategories,id",
+            "description" => "required"
 		]);
 
 
@@ -169,6 +174,7 @@ class ProductsController extends AdminBaseController
 		}
 
 		$product->fill($request->only([
+			"code",
 			"category_id",
 			"subcategory_id",
 			"name",

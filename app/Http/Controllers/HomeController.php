@@ -73,5 +73,24 @@ class HomeController extends StorefrontBaseController
     }
 
 
+    /**
+     * Enviar mensaje de contacto.
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function submitMessage(Request $request)
+    {
+        $request->validate([
+            "nombre" => "required",
+            "email" => "required|email",
+            "mensaje" => "required",
+        ]);
+
+        // send message
+
+        $request->session()->flash('success', 1);
+        return redirect()->back();
+    }
+
 
 }

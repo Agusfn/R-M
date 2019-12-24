@@ -56,7 +56,7 @@
 										<td><i class="fa fa-bars handle" aria-hidden="true"></i></td>
 										<td>{{ $category->name }}</td>
 										<td>{{ $category->name_slug }}</td>
-										<td></td>
+										<td>{{ $category->products()->count() }}</td>
 										<td>{{ $category->subcategories->count() }}</td>
 										<td><a href="{{ route('admin.categories.details', $category->id) }}" class="btn btn-primary">Ver </a></td>
 									</tr>

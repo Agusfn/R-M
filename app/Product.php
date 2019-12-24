@@ -3,6 +3,7 @@
 namespace App;
 
 use App\ProductImage;
+use App\Filters\Filterable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 use CyrildeWit\EloquentViewable\Viewable;
@@ -12,24 +13,11 @@ use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
 
 class Product extends Model implements ViewableContract
 {
-    use Viewable;
+    use Viewable, Filterable;
 
 
 	protected $guarded = [];
 
-
-	/**
-	 * Generate a random unique product code with 6 digits.
-	 * @return int
-	 */
-	public static function generateCode()
-	{
-		$code = rand(100000, 999999);
-		if(self::where("code", $code)->count() > 0)
-			return self::generateCode();
-		else
-			return $code;
-	}
 
 
 	public function scopeWhereCategoryId($query, $categoryId)
@@ -57,17 +45,6 @@ class Product extends Model implements ViewableContract
 	public function scopeOrderByTopViews($query) {
 		return $query->orderByViews('desc', Period::pastDays(14));
 	}
-
-
-	/**
-	 * Find a product with its code.
-	 * @return App\Product|null
-	 */
-	public function scopeWhereCode($query, $code)
-	{
-		return $query->where("code", $code);
-	}
-
 
 
 	public function images()
@@ -153,7 +130,7 @@ class Product extends Model implements ViewableContract
 		if($this->subcategory_id == null) {
 			return route('product-no-subcategory', [
 				$this->category->name_slug, 
-				$this->code, 
+				$this->id, 
 				$this->name_slug
 			]);
 		}
@@ -161,7 +138,7 @@ class Product extends Model implements ViewableContract
 			return route('product', [
 				$this->category->name_slug, 
 				$this->subcategory->name_slug,
-				$this->code, 
+				$this->id, 
 				$this->name_slug
 			]);
 		}

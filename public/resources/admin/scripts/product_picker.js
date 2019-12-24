@@ -70,7 +70,7 @@ function reloadProductPickerModal() {
 
 	$.ajax({
 		method: 'GET',
-		url: 'http://localhost/rm/public/admin/portadas/obtener_productos',
+		url: productFetchResUrl,
 
 		success: function(data, status) {
 			console.log(data);

@@ -46,7 +46,8 @@
 							<h3 class="panel-title">
 								Modificar producto
 								<div class="btn-group" style="float:right">
-									<form action="{{ url('admin/productos/'.$product->id.'/eliminar') }}" method="POST">
+									<a class="btn btn-info" href="{{ $product->url() }}" target="_blank">Ver en sitio web <span class="glyphicon glyphicon-globe"></span></a>&nbsp;
+									<form action="{{ url('admin/productos/'.$product->id.'/eliminar') }}" method="POST" style="display: inline-block;">
 										@csrf
 										<button type="button" class="btn btn-danger" onclick="if(confirm('¿Eliminar producto?')) $(this).parent().submit();">Eliminar producto</button>
 									</form>
@@ -74,6 +75,14 @@
 											<label>Nombre del producto</label>
 											<input type="text" class="form-control" name="name" value="{{ old('name') ?: ($product->name ?? '') }}">
 			                                @error('name')
+			                                    <span class="help-block">{{ $message }}</span>
+			                                @enderror
+										</div>
+
+										<div class="form-group @error('code') has-error @enderror">
+											<label>Código de producto (opcional) <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Código interno para identificar el producto"></span></label>
+											<input type="text" class="form-control" name="code" value="{{ old('code') ?: ($product->code ?? '') }}">
+			                                @error('code')
 			                                    <span class="help-block">{{ $message }}</span>
 			                                @enderror
 										</div>

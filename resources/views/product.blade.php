@@ -157,7 +157,7 @@
         <!-- Items Slider -->
         <div class="item-slide-5 with-nav"> 
           
-          @foreach($recentlyViewed as $product)
+          @foreach($recentlyViewedProducts as $product)
 
             @include('layouts.product')
 
