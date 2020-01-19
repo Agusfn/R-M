@@ -13,7 +13,8 @@
               
             </div>
             
-            {{ $products->appends(request()->all())->links() }}
-
+            <div style="text-align: center;">
+	            {{ $products->appends(request()->all())->links() }}
+	        </div>
             
 @endsection

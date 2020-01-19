@@ -36,9 +36,11 @@ class ProductFetch
 	        	->orderBy("id", "DESC")
 	        	->limit($countDiff)
 	        	->get();
+
+	        $featuredProducts = $featuredProducts->merge($fillProducts);
         }
 
-        return $featuredProducts->merge($fillProducts);
+        return $featuredProducts;
 	}
 
 
@@ -79,12 +81,14 @@ class ProductFetch
 		        	->orderBy("id", "DESC")
 		        	->limit($countDiff)
 		        	->get();
+
+		        $featuredProducts = $featuredProducts->merge($fillProducts);
 	        }
 
 	        $topCategoryProducts[] = [
 	        	"category_slug" => $category->name_slug,
 	        	"category_name" => $category->name,
-	        	"products" => $featuredProducts->merge($fillProducts)
+	        	"products" => $featuredProducts
 	        ];
 
 		}

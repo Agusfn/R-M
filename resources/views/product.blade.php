@@ -32,14 +32,26 @@
               <!-- Categories -->
               <h6>Categorías</h6>
               <div class="checkbox checkbox-primary">
+
                 <ul>
-                  <li>
-                    <a href="{{ route('search') }}">
-                      <input id="cate1" class="styled" type="checkbox" checked="">
-                      <label for="cate1">{{ $product->category->name }}</label>
-                    </a>
-                  </li>
+                    @foreach($categories as $category)
+
+                    <li>
+                      @if($product->category->id == $category->id)
+                      <a href="{{ route('search') }}">
+                        <input id="cate{{ $loop->index+1 }}" class="styled" type="checkbox" checked="">
+                        <label for="cate{{ $loop->index+1 }}">{{ $category->name }}</label>
+                      </a>
+                      @else
+                      <a href="{{ route('category', [$category->name_slug]) }}">
+                        <input id="cate{{ $loop->index+1 }}" class="styled" type="checkbox">
+                        <label for="cate{{ $loop->index+1 }}">{{ $category->name }}</label>
+                      </a>
+                      @endif
+                    </li>
+                    @endforeach
                 </ul>
+
               </div>
               
 
@@ -48,19 +60,27 @@
               <!-- Subcategories -->
               <h6>Subcategorías</h6>
               <div class="checkbox checkbox-primary">
+                
                 <ul>
+                  @foreach($product->category->subcategories as $subcategory)
                   <li>
-                    <a href="{{ route('category', $product->category->name_slug) }}">
-                      <input id="subcate1" class="styled" type="checkbox" checked="">
-                      <label for="subcate1">{{ $product->subcategory->name }}</label>
+                    @if($product->subcategory->id == $subcategory->id)
+                    <a href="{{ route('category', [$product->category->name_slug]) }}">
+                      <input id="subcate{{ $loop->index+1 }}" class="styled" type="checkbox" checked="">
+                      <label for="subcate{{ $loop->index+1 }}">{{ $subcategory->name }}</label>
                     </a>
+                    @else
+                    <a href="{{ route('subcategory', [$product->category->name_slug, $subcategory->name_slug]) }}">
+                      <input id="subcate{{ $loop->index+1 }}" class="styled" type="checkbox">
+                      <label for="subcate{{ $loop->index+1 }}">{{ $subcategory->name }}</label>
+                    </a>
+                    @endif
+
                   </li>
+                  @endforeach
                 </ul>
               </div>
-
               @endif
-              
-
 
             </div>
           </div>

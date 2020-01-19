@@ -12,11 +12,8 @@ class StorefrontBaseController extends Controller
 
 	public function __construct()
 	{
-		$featuredItems = new FeaturedItems();
-		$categories = Category::with("subcategories")->get();
-
-		View::share("featuredItems", $featuredItems);
-		View::share("categories", $categories);
+		View::share("featuredItems", (new FeaturedItems()));
+		View::share("categories", Category::with("subcategories")->get());
 	}
 
 

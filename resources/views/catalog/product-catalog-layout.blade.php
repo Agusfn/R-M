@@ -69,27 +69,26 @@
               <!-- Categories -->
               <h6>Categorías</h6>
               <div class="checkbox checkbox-primary">
+               
                 <ul>
-                  @if(isset($categoryFiltered))
-                  <li>
-                    <a href="{{ route('search', request()->except('page')) }}">
-                      <input id="cate1" class="styled" type="checkbox" checked="">
-                      <label for="cate1">{{ $categoryFiltered->name }}</label>
-                    </a>
-                  </li>
-                  @else
-
                     @foreach($categories as $category)
+
                     <li>
+                      @if(isset($categoryFiltered) && $categoryFiltered->id == $category->id)
+                      <a href="{{ route('search', request()->except('page')) }}">
+                        <input id="cate{{ $loop->index+1 }}" class="styled" type="checkbox" checked="">
+                        <label for="cate{{ $loop->index+1 }}">{{ $category->name }}</label>
+                      </a>
+                      @else
                       <a href="{{ route('category', array_merge([$category->name_slug], request()->except('page'))) }}">
                         <input id="cate{{ $loop->index+1 }}" class="styled" type="checkbox">
                         <label for="cate{{ $loop->index+1 }}">{{ $category->name }}</label>
                       </a>
+                      @endif
                     </li>
                     @endforeach
-
-                  @endif
                 </ul>
+
               </div>
               
 
@@ -99,25 +98,25 @@
               <h6>Subcategorías</h6>
               <div class="checkbox checkbox-primary">
                 <ul>
-                  @if(isset($subcategoryFiltered))
+
+                  @foreach($categoryFiltered->subcategories as $subcategory)
                   <li>
+                    @if(isset($subcategoryFiltered) && $subcategoryFiltered->id == $subcategory->id)
                     <a href="{{ route('category', array_merge([$categoryFiltered->name_slug], request()->except('page'))) }}">
-                      <input id="subcate1" class="styled" type="checkbox" checked="">
-                      <label for="subcate1">{{ $subcategoryFiltered->name }}</label>
+                      <input id="subcate{{ $loop->index+1 }}" class="styled" type="checkbox" checked="">
+                      <label for="subcate{{ $loop->index+1 }}">{{ $subcategory->name }}</label>
                     </a>
+                    @else
+                    <a href="{{ route('subcategory', array_merge([$categoryFiltered->name_slug, $subcategory->name_slug], request()->except('page'))) }}">
+                      <input id="subcate{{ $loop->index+1 }}" class="styled" type="checkbox">
+                      <label for="subcate{{ $loop->index+1 }}">{{ $subcategory->name }}</label>
+                    </a>
+                    @endif
+
                   </li>
-                  @else
+                  @endforeach
 
-                    @foreach($categoryFiltered->subcategories as $subcategory)
-                    <li>
-                      <a href="{{ route('subcategory', array_merge([$categoryFiltered->name_slug, $subcategory->name_slug], request()->except('page'))) }}">
-                        <input id="subcate{{ $loop->index+1 }}" class="styled" type="checkbox">
-                        <label for="subcate{{ $loop->index+1 }}">{{ $subcategory->name }}</label>
-                      </a>
-                    </li>
-                    @endforeach
 
-                  @endif
                 </ul>
               </div>
 
@@ -146,7 +145,12 @@
               <ul>
                 <!-- Short List -->
                 <li>
-                  <p>Mostrando {{ $products->firstItem().'-'.($products->firstItem() + $products->count()) }} de {{ $products->total() }} resultados</p>
+                  @if($products->total() > 0)
+                    <p>Mostrando resultados {{ $products->firstItem().'-'.($products->firstItem() + $products->count() - 1) }} de {{ $products->total() }} total</p>
+                  @else
+                    <p>No se encontraron resultados.</p>
+                  @endif
+                  
                 </li>
                 <!-- Short  -->
                 <li >
