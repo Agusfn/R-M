@@ -162,11 +162,7 @@
               </div>
             </li>
 
-            <li> <a href="shop.html">Dónde estamos</a></li>
-
             <li {{ request()->route()->getName() == 'contact' ? 'class=active' : "" }}> <a href="{{ route('contact') }}">Contacto</a></li>
-
-            <li {{ request()->route()->getName() == 'about-us' ? 'class=active' : "" }}> <a href="{{ route('about-us') }}">Nosotros</a></li>
 
           </ul>
         </div>

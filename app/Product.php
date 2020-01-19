@@ -15,6 +15,8 @@ class Product extends Model implements ViewableContract
 {
     use Viewable, Filterable;
 
+    
+    protected $removeViewsOnDelete = true;
 
 	protected $guarded = [];
 
@@ -34,16 +36,6 @@ class Product extends Model implements ViewableContract
 	public function scopeWithCategory($query)
 	{
 		return $query->with(["category","subcategory"]);
-	}
-
-
-	/**
-	 * Ordenar por visitas en ultimas 2 semanas.
-	 * @param  [type] $query [description]
-	 * @return [type]        [description]
-	 */
-	public function scopeOrderByTopViews($query) {
-		return $query->orderByViews('desc', Period::pastDays(14));
 	}
 
 

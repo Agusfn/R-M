@@ -12,8 +12,8 @@
           <p>Whatsapp: +54 11 65841728</p>
           <p>Email: <a href="mailto:ventas@rympapelera.com.ar">ventas@rympapelera.com.ar</a></p>
           <div class="social-links"> 
-            <a href="#."><i class="fa fa-facebook"></i></a> 
-            <a href="#."><i class="fa fa-instagram"></i></a> 
+            <a href="https://www.facebook.com/RM-Papelera-742145552601137/" target="_blank"><i class="fa fa-facebook"></i></a> 
+            <a href="https://www.instagram.com/rym_papelera/" target="_blank"><i class="fa fa-instagram"></i></a> 
           </div>
         </div>
 
@@ -30,9 +30,7 @@
         <div class="col-md-3">
           <h4>Páginas</h4>
           <ul class="links-footer">
-            <li><a href="#.">Dónde estamos</a></li>
             <li><a href="{{ route('contact') }}">Contacto</a></li>
-            <li><a href="{{ route('about-us') }}">Quienes somos</a></li>
           </ul>
         </div>
       </div>

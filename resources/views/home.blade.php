@@ -161,7 +161,7 @@
         <!-- Items -->
         <div class="item-col-5"> 
           
-            @foreach($mostViewedProducts as $product)
+            @foreach($topViewedProducts as $product)
 
                 @if($loop->first)
 
@@ -196,36 +196,23 @@
         </div>
 
         <ul class="nav margin-bottom-40" role="tablist">
-          <li role="presentation" class="active"><a href="#embalaje" aria-controls="embalaje" role="tab" data-toggle="tab">Embalaje</a></li>
-          <li role="presentation"><a href="#polietileno" aria-controls="polietileno" role="tab" data-toggle="tab">Polietileno</a></li>
-          <li role="presentation"><a href="#descartables" aria-controls="descartables" role="tab" data-toggle="tab">Descartables</a></li>
-          <li role="presentation"><a href="#libreria" aria-controls="libreria" role="tab" data-toggle="tab">Librería</a></li>
-          <li role="presentation"><a href="#papeleria" aria-controls="papeleria" role="tab" data-toggle="tab">Papelería</a></li>
+          @foreach($topViewedProductsByCategory as $topViewedCategoryProducts)
+          <li role="presentation" class="{{ $loop->first ? 'active' : '' }}"><a href="#{{ $topViewedCategoryProducts['category_slug'] }}" aria-controls="{{ $topViewedCategoryProducts['category_slug'] }}" role="tab" data-toggle="tab">{{ $topViewedCategoryProducts["category_name"] }}</a></li>
+          @endforeach
         </ul>
         
         <!-- Tab panes -->
         <div class="tab-content"> 
 
-          <div role="tabpanel" class="tab-pane active fade in" id="embalaje"> 
+
+          @foreach($topViewedProductsByCategory as $topViewedCategoryProducts)
+
+          <div role="tabpanel" class="tab-pane {{ $loop->first ? 'active' : '' }} fade in" id="{{ $topViewedCategoryProducts['category_slug'] }}"> 
             
             <!-- Items -->
             <div class="item-col-5"> 
               
-                @foreach($embalajeFeatured as $product)
-
-                    @include('layouts.product')
-
-                @endforeach
-
-            </div>
-          </div>
-          
-
-          <div role="tabpanel" class="tab-pane fade" id="polietileno"> 
-            <!-- Items -->
-            <div class="item-col-5"> 
-              
-                @foreach($polietilenoFeatured as $product)
+                @foreach($topViewedCategoryProducts["products"] as $product)
 
                     @include('layouts.product')
 
@@ -234,46 +221,7 @@
             </div>
           </div>
 
-          <div role="tabpanel" class="tab-pane fade" id="descartables"> 
-            
-            <!-- Items -->
-            <div class="item-col-5"> 
-              
-                @foreach($descartablesFeatured as $product)
-
-                    @include('layouts.product')
-
-                @endforeach
-
-            </div>
-          </div>
-
-          <div role="tabpanel" class="tab-pane fade" id="libreria"> 
-            
-            <!-- Items -->
-            <div class="item-col-5"> 
-              
-                @foreach($libreriaFeatured as $product)
-
-                    @include('layouts.product')
-
-                @endforeach
-            </div>
-          </div>
-
-          <div role="tabpanel" class="tab-pane fade" id="papeleria"> 
-            
-            <!-- Items -->
-            <div class="item-col-5"> 
-              
-                @foreach($papeleriaFeatured as $product)
-
-                    @include('layouts.product')
-
-                @endforeach
-
-            </div>
-          </div>
+          @endforeach
 
         </div>
       </div>
@@ -289,7 +237,7 @@
         </div>
     
         <div class="item-col-5"> 
-            @foreach($mostRecent as $product)
+            @foreach($mostRecentProducts as $product)
                 @include('layouts.product')
             @endforeach
         </div>
@@ -301,11 +249,11 @@
     <section class="light-gry-bg clients-img margin-top-60">
       <div class="container">
         <ul>
-          <li><img src="{{ asset('resources/images/c-img-1.png') }}" alt="" ></li>
-          <li><img src="{{ asset('resources/images/c-img-2.png') }}" alt="" ></li>
-          <li><img src="{{ asset('resources/images/c-img-3.png') }}" alt="" ></li>
-          <li><img src="{{ asset('resources/images/c-img-4.png') }}" alt="" ></li>
-          <li><img src="{{ asset('resources/images/c-img-5.png') }}" alt="" ></li>
+          <li><img src="{{ asset('resources/images/partner_logos/rolanplast_bn.png') }}" alt="" ></li>
+          <li><img src="{{ asset('resources/images/partner_logos/cotnyl_bn.png') }}" alt="" ></li>
+          <li><img src="{{ asset('resources/images/partner_logos/plastivas_bn.png') }}" alt="" ></li>
+          <li><img src="{{ asset('resources/images/partner_logos/work_bn.png') }}" alt="" ></li>
+          <li><img src="{{ asset('resources/images/partner_logos/rapifix.png') }}" alt="" ></li>
         </ul>
       </div>
     </section>

@@ -14,10 +14,8 @@
 
 Route::get("/", 'HomeController@index')->name('home');
 
-Route::get("quienes-somos", "HomeController@aboutUs")->name("about-us");
 Route::get("contacto", "HomeController@contact")->name("contact");
 Route::post("contacto", "HomeController@submitMessage");
-Route::get("donde-estamos", "HomeController@ourStore")->name("our-store");
 
 Route::get("buscar", "CatalogController@search")->name("search");
 Route::get("{category_slug}", "CatalogController@category")->name("category");
