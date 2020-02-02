@@ -28,8 +28,7 @@ class CreateProduct extends FormRequest
             "ordered_img_ids" => "required|json",
             "name" => "required",
             "category_id" => "required|integer|exists:categories,id",
-            "subcategory_id" => "nullable|integer|exists:subcategories,id",
-            "description" => "required"
+            "subcategory_id" => "nullable|integer|exists:subcategories,id"
         ];
     }
 }

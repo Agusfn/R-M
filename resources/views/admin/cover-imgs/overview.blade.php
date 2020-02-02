@@ -13,21 +13,14 @@
 @section('content')
 
 
-<nav aria-label="breadcrumb">
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item">Portadas y productos destacados</li>
-	</ol>
-</nav>
-
-
 <div class="row">
 
 	<div class="col-md-6">
 		<div class="panel">
 			<div class="panel-heading">
 				<div class="clearfix">
-					<h3 class="panel-title" style="float: left;">Slider de imágenes</h3>
-					<a class="btn btn-success" style="float: right;" href="{{ route('admin.covers.carouselitem.create') }}">Agregar elemento</a>
+					<h3 class="panel-title" style="float: left;">Slider de imágenes principal</h3>
+					<a class="btn btn-success" style="float: right;" href="{{ route('admin.covers.carouselitem.create') }}"><i class="fa fa-plus" aria-hidden="true"></i> Agregar elemento</a>
 				</div>
 			</div>
 			<div class="panel-body">
@@ -60,7 +53,7 @@
 <div class="col-md-6">
 		<div class="panel">
 			<div class="panel-heading">
-				<h3 class="panel-title">Productos destacados/imágenes promocionales</h3>
+				<h3 class="panel-title">Bloques laterales (productos destacados/imgs promocionales)</h3>
 			</div>
 			<div class="panel-body">
                 <table class="table">
@@ -73,7 +66,7 @@
                 	</thead>
                 	<tbody>
                 		<tr>
-                			<td>Producto destacado en barra de navegación</td>
+                			<td>Bloque en menu desplegable "Productos" en<br/> barra de navegación</td>
                 			<td>
                 				@if($featuredItems->navbarFeatured)
                 				<img src="{{ $featuredItems->navbarFeatured->imgUrl() }}" width="150">

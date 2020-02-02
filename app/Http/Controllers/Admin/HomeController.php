@@ -10,7 +10,7 @@ class HomeController extends AdminBaseController
 
 	public function index()
 	{
-		return redirect()->route("admin.categories.list");
+		return redirect()->route("admin.products.list");
 	}
 
 

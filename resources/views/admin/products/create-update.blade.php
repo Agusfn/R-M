@@ -128,7 +128,7 @@
 										</div>
 
 										<div class="form-group @error('description') has-error @enderror">
-											<label>Descripción</label>
+											<label>Descripción (opcional)</label>
 											<textarea class="form-control" name="description">{{ old('description') ?: ($product->description ?? '') }}</textarea>
 			                                @error('description')
 			                                    <span class="help-block">{{ $message }}</span>

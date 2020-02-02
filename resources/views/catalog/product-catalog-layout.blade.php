@@ -5,7 +5,7 @@
 @if(request()->q)
   @section('title', 'Buscar ".request()->q."')
 @elseif(isset($subcategoryFiltered))
-  @section('title', $subcategoryFiltered->name)
+  @section('title', $categoryFiltered->name.' - '.$subcategoryFiltered->name)
 @elseif(isset($categoryFiltered))
   @section('title', $categoryFiltered->name)
 @else
@@ -134,7 +134,7 @@
               @if(request()->q)
               <h2>Buscar "{{ request()->q }}"</h2>
               @elseif(isset($subcategoryFiltered))
-              <h2>{{ $subcategoryFiltered->name }}</h2>
+              <h2>{{ $categoryFiltered->name.' - '.$subcategoryFiltered->name }}</h2>
               @elseif(isset($categoryFiltered))
               <h2>{{ $categoryFiltered->name }}</h2>
               @else
@@ -153,7 +153,7 @@
                   
                 </li>
                 <!-- Short  -->
-                <li >
+                {{--<li >
                   <select class="selectpicker">
                     <option>Show 12 </option>
                     <option>Show 24 </option>
@@ -167,7 +167,7 @@
                     <option>Sort by Default </option>
                     <option>Sort by Default</option>
                   </select>
-                </li>
+                </li>--}}
 
                 <!-- Grid Layer -->
                 <li class="grid-layer"> 
