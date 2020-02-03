@@ -2,7 +2,7 @@
   <!-- Header -->
   <header>
     <div class="container">
-      <div class="logo"> <a href="{{ route('home') }}"><img src="{{ asset('resources/images/logo.png') }}" alt="" ></a> </div>
+      <div class="logo"> <a href="{{ route('home') }}"><img src="{{ asset('resources/images/logo.png') }}" alt="RM Papelera" ></a> </div>
       <div class="search-cate">
         <form action="{{ route('search') }}" method="GET">
           <select class="selectpicker" id="search-filter-category" {{ isset($categoryFiltered) ? 'name=categoria' : '' }}>

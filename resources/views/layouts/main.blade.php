@@ -3,7 +3,12 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="author" content="M_Adnan" />
+
+<meta name="robots" content="index, follow" />
+<meta property="og:url" content="{{ Request::url() }}" />
+
+@yield('meta')
+
 <!-- Document Title -->
 <title>@yield('title') - R&M Papelera</title>
 

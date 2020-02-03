@@ -1,7 +1,7 @@
           <!-- Product -->
           <div class="product">
             <article> 
-            	<a href="{{ $product->url() }}"><img class="img-responsive" src="{{ $product->thumbnailUrl() }}" alt="" ></a> <!--span class="sale-tag">-25%</span--> 
+            	<a href="{{ $product->url() }}"><img class="img-responsive" src="{{ $product->thumbnailUrl() }}" alt="{{ $product->name }}" ></a> <!--span class="sale-tag">-25%</span--> 
               
               <!-- Content --> 
               <span class="tag">{{ $product->category->name }}</span> <a href="{{ $product->url() }}" class="tittle">{{ $product->name }}</a> 

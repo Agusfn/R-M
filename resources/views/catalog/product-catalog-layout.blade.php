@@ -1,6 +1,32 @@
 @extends('layouts.main')
 
 
+@section('meta')
+
+  @if(isset($subcategoryFiltered))
+
+    @php($description = $categoryFiltered->name . ' - ' . $subcategoryFiltered->name.'. Catálogo de productos de '.$categoryFiltered->name)
+
+  @elseif(isset($categoryFiltered))
+    
+    @php($description = 'Catálogo de productos de '.$categoryFiltered->name.' - ')
+    @foreach($categoryFiltered->subcategories as $subcategory)
+      @php($description .= $subcategory->name)
+      @if(!$loop->last)
+        @php($description .= ', ')
+      @endif
+    @endforeach
+
+  @endif
+
+<meta name="description" content="{{ $description }}">
+<meta property="og:description" content="{{ $description }}" />
+
+<meta property="og:image" content="{{ asset('resources/images/logo-grande.jpg') }}" />
+<meta property="og:type" content="website" /> 
+
+@endsection
+
 
 @if(request()->q)
   @section('title', 'Buscar ".request()->q."')

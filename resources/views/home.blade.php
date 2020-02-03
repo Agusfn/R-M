@@ -1,6 +1,17 @@
 @extends('layouts.main')
 
+
+@section('meta')
+<meta name="description" content="">
+
+<meta property="og:description" content="" />
+<meta property="og:image" content="{{ asset('resources/images/logo-grande.jpg') }}" />
+<meta property="og:type" content="website" /> 
+@endsection
+
+
 @section('title', 'Inicio')
+
 
 @section('content')
 <section class="slid-sec">
@@ -23,7 +34,7 @@
                   <!-- SLIDE  -->
                   <li data-transition="random" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" > 
                     <!-- MAIN IMAGE --> 
-                    <img class="aligncenter" src="{{ $carouselItem->imgUrl() }}"  alt="slider"  data-bgposition="center bottom" data-bgfit="cover" data-bgrepeat="no-repeat"> 
+                    <img class="aligncenter" src="{{ $carouselItem->imgUrl() }}"  alt="{{ $carouselItem->title }}"  data-bgposition="center bottom" data-bgfit="cover" data-bgrepeat="no-repeat"> 
                     
                     @if($carouselItem->title)
                     <div class="tp-caption sfr tp-resizeme" 
@@ -249,11 +260,11 @@
     <section class="light-gry-bg clients-img margin-top-60">
       <div class="container">
         <ul>
-          <li><img src="{{ asset('resources/images/partner_logos/rolanplast_bn.png') }}" alt="" ></li>
-          <li><img src="{{ asset('resources/images/partner_logos/cotnyl_bn.png') }}" alt="" ></li>
-          <li><img src="{{ asset('resources/images/partner_logos/plastivas_bn.png') }}" alt="" ></li>
-          <li><img src="{{ asset('resources/images/partner_logos/work_bn.png') }}" alt="" ></li>
-          <li><img src="{{ asset('resources/images/partner_logos/rapifix.png') }}" alt="" ></li>
+          <li><img src="{{ asset('resources/images/partner_logos/rolanplast_bn.png') }}" alt="rolanplast" ></li>
+          <li><img src="{{ asset('resources/images/partner_logos/cotnyl_bn.png') }}" alt="cotnyl" ></li>
+          <li><img src="{{ asset('resources/images/partner_logos/plastivas_bn.png') }}" alt="plastivas" ></li>
+          <li><img src="{{ asset('resources/images/partner_logos/work_bn.png') }}" alt="work" ></li>
+          <li><img src="{{ asset('resources/images/partner_logos/rapifix.png') }}" alt="rapifix" ></li>
         </ul>
       </div>
     </section>

@@ -95,11 +95,14 @@ class Product extends Model implements ViewableContract
 
 	/**
 	 * Obtener imagen principal del producto.
-	 * @return [type] [description]
+	 * @return string|null [description]
 	 */
 	public function imgUrl()
 	{
-		return Storage::url($this->main_img_path);
+		if($this->main_img_path)
+			return Storage::url($this->main_img_path);
+		else
+			return null;
 	}
 
 
@@ -109,7 +112,10 @@ class Product extends Model implements ViewableContract
 	 */
 	public function thumbnailUrl()
 	{
-		return Storage::url($this->main_img_thumbnail_path);
+		if($this->main_img_thumbnail_path)
+			return Storage::url($this->main_img_thumbnail_path);
+		else
+			return null;
 	}
 	
 

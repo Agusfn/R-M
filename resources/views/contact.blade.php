@@ -1,5 +1,15 @@
 @extends('layouts.main')
 
+
+@section('meta')
+<meta name="description" content="">
+
+<meta property="og:description" content="" />
+<meta property="og:image" content="{{ asset('resources/images/logo-grande.jpg') }}" />
+<meta property="og:type" content="website" /> 
+@endsection
+
+
 @section('title', 'Contacto')
 
 

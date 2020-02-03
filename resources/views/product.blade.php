@@ -1,5 +1,14 @@
 @extends('layouts.main')
 
+
+@section('meta')
+<meta name="description" content="{{ str_replace(PHP_EOL, ' ', $product->description)  }}">
+
+<meta property="og:description" content="{{ str_replace(PHP_EOL, ' ', $product->description)  }}" />
+<meta property="og:image" content="{{ $product->imgUrl() ?: '' }}" />
+<meta property="og:type" content="website" /> 
+@endsection
+
 @section('title', $product->name)
 
 @section('content')
@@ -96,7 +105,7 @@
                       <div class="thumb-slider">
                         <ul class="slides">
                           @foreach($product->images as $image)
-                          <li data-thumb="{{ $image->thumbnailUrl() }}"> <img src="{{ $image->url() }}" alt="" > </li>
+                          <li data-thumb="{{ $image->thumbnailUrl() }}"> <img src="{{ $image->url() }}" alt="{{ $product->category->name }}" > </li>
                           @endforeach
                           <!--li data-thumb="images/item-img-1-1.jpg"> <img src="images/item-img-1-1.jpg" alt="" > </li>
                           <li data-thumb="images/item-img-1-2.jpg"> <img src="images/item-img-1-2.jpg" alt="" > </li>
