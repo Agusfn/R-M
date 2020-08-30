@@ -189,10 +189,10 @@ $(document).ready(function() {
 	// Sólo featuredItems que puedan ser ocultables
 	$("input[name=mostrar_item]").change(function() {
 		if($(this).val() == "no") {
-			$("input[name=title], #change_image_btn, input[name=image_file], input[name=image_url], input[name=show_action_btn], input[name=action_btn_text], input[name=action_btn_url]").prop("disabled", true);
+			$("input[name=title], #change_image_btn, input[name=image_file], input[name=image_url], input[name=show_action_btn], input[name=action_btn_text], input[name=action_btn_url], input[name=image_type]").prop("disabled", true);
 		}
 		else {
-			$("input[name=title], #change_image_btn, input[name=show_action_btn]").prop("disabled", false);
+			$("input[name=title], #change_image_btn, input[name=show_action_btn], input[name=image_type]").prop("disabled", false);
 			if($("#img_area").is(":visible")) {
 				$("input[name=image_type]:checked").trigger("change");
 			}
@@ -249,9 +249,9 @@ $(document).ready(function() {
 		});
 	});
 
-
-	$("input[name=mostrar_item]:checked").trigger("change");
 	$("input[name=image_type]:checked").trigger("change");
+	$("input[name=mostrar_item]:checked").trigger("change");
+	
 
 
 	@if($actionBtnChecked)
