@@ -71,7 +71,7 @@
                 				@if($featuredItems->navbarFeatured)
                 				<img src="{{ $featuredItems->navbarFeatured->imgUrl() }}" width="150">
                 				@else
-                				No configurada
+                				No mostrar nada
                 				@endif
                 			</td>
                 			<td><a class="btn btn-primary" href="{{ route('admin.covers.navbarfeatured') }}">Cambiar</a></td>
@@ -82,7 +82,7 @@
                 				@if($featuredItems->sliderFirstFeatured)
                 				<img src="{{ $featuredItems->sliderFirstFeatured->imgUrl() }}" width="150">
                 				@else
-                				No configurada
+                				No mostrar nada
                 				@endif
                 			</td>
                 			<td><a class="btn btn-primary" href="{{ route('admin.covers.slider1featured') }}">Cambiar</a></td>
@@ -93,7 +93,7 @@
                 				@if($featuredItems->sliderSecondFeatured)
                 				<img src="{{ $featuredItems->sliderSecondFeatured->imgUrl() }}" width="150">
                 				@else
-                				No configurada
+                				No mostrar nada
                 				@endif
                 			</td>
                 			<td><a class="btn btn-primary" href="{{ route('admin.covers.slider2featured') }}">Cambiar</a></td>

@@ -2,14 +2,19 @@
 
 
 @section('meta')
+  
+  @if(request()->q)
 
-  @if(isset($subcategoryFiltered))
+    @php($description = 'Buscar "'.request()->q.'" en el sitio.')
+
+  @elseif(isset($subcategoryFiltered))
 
     @php($description = $categoryFiltered->name . ' - ' . $subcategoryFiltered->name.'. Catálogo de productos de '.$categoryFiltered->name)
 
   @elseif(isset($categoryFiltered))
     
     @php($description = 'Catálogo de productos de '.$categoryFiltered->name.' - ')
+    
     @foreach($categoryFiltered->subcategories as $subcategory)
       @php($description .= $subcategory->name)
       @if(!$loop->last)
@@ -29,7 +34,7 @@
 
 
 @if(request()->q)
-  @section('title', 'Buscar ".request()->q."')
+  @section('title', 'Buscar '.request()->q)
 @elseif(isset($subcategoryFiltered))
   @section('title', $categoryFiltered->name.' - '.$subcategoryFiltered->name)
 @elseif(isset($categoryFiltered))

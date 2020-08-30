@@ -104,6 +104,18 @@ class FeaturedItems
 	}
 
 
+	public function removeSliderFirstFeatured()
+	{
+		if($this->sliderFirstFeatured) {
+			$this->sliderFirstFeatured->deleteImageIfExists();
+			$this->sliderFirstFeatured = null;		
+		}
+		Setting::set("storefront.featured_items.".self::SLIDER_FIRST_FEATURED, null);
+		Setting::save();
+	}
+
+
+
 	/**
 	 * Establecer ítem destacado
 	 * @param string $title     
@@ -122,5 +134,15 @@ class FeaturedItems
 		Setting::save();
 	}
 
+
+	public function removeSliderSecondFeatured()
+	{
+		if($this->sliderSecondFeatured) {
+			$this->sliderSecondFeatured->deleteImageIfExists();
+			$this->sliderSecondFeatured = null;		
+		}
+		Setting::set("storefront.featured_items.".self::SLIDER_SECOND_FEATURED, null);
+		Setting::save();
+	}
 
 }

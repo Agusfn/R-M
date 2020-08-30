@@ -92,6 +92,13 @@ class CoverImagesController extends AdminBaseController
 
 	}
 
+
+
+	/**
+	 * Mostrar formulario para modificar imagen destacada superior
+	 * @param  FeaturedItems $featuredItems [description]
+	 * @return [type]                       [description]
+	 */
 	public function showSliderOneFeaturedForm(FeaturedItems $featuredItems)
 	{
 		return view("admin.cover-imgs.featured-item")->with([
@@ -100,29 +107,47 @@ class CoverImagesController extends AdminBaseController
 		]);
 	}
 
+
+	/**
+	 * Modificar imagen destacada superior (primera)
+	 * @param  EditFeaturedItem $request       [description]
+	 * @param  FeaturedItems    $featuredItems [description]
+	 * @return [type]                          [description]
+	 */
 	public function changeSliderOneFeatured(EditFeaturedItem $request, FeaturedItems $featuredItems)
 	{
 		$request->validated();
 
-		$image = $this->loadImage($request);
+		if($request->mostrar_item == "no") {
+			$featuredItems->removeSliderFirstFeatured();
+		}
+		else {
+			$image = $this->loadImage($request);
 
-		if($image instanceof RedirectResponse) {
-			return $image;
+			if($image instanceof RedirectResponse) {
+				return $image;
+			}
+
+			$featuredItems->setSliderFirstFeatured(
+				$request->title, 
+				$image, 
+				$request->has("show_action_btn"), 
+				$request->action_btn_text, 
+				$request->action_btn_url
+			);
+		
 		}
 
-		$featuredItems->setSliderFirstFeatured(
-			$request->title, 
-			$image, 
-			$request->has("show_action_btn"), 
-			$request->action_btn_text, 
-			$request->action_btn_url
-		);
-		
 		return redirect()->back()->with("success", true);
 
 	}
 
 
+	/**
+	 * Mostrar formulario para modificar imagen destacada inferior
+	 * @param  FeaturedItems $featuredItems [description]
+	 * @return [type]                       [description]
+	 */
 	public function showSliderTwoFeaturedForm(FeaturedItems $featuredItems)
 	{
 		return view("admin.cover-imgs.featured-item")->with([
@@ -131,25 +156,40 @@ class CoverImagesController extends AdminBaseController
 		]);
 	}
 
+
+
+	/**
+	 * Modificar imagen destacada inferior
+	 * @param  EditFeaturedItem $request       [description]
+	 * @param  FeaturedItems    $featuredItems [description]
+	 * @return [type]                          [description]
+	 */
 	public function changeSliderTwoFeatured(EditFeaturedItem $request, FeaturedItems $featuredItems)
 	{
 		$request->validated();
 
-		$image = $this->loadImage($request);
-
-		if($image instanceof RedirectResponse) {
-			return $image;
+		if($request->mostrar_item == "no") {
+			$featuredItems->removeSliderSecondFeatured();
 		}
+		else {
+			$image = $this->loadImage($request);
 
-		$featuredItems->setSliderSecondFeatured(
-			$request->title, 
-			$image, 
-			$request->has("show_action_btn"), 
-			$request->action_btn_text, 
-			$request->action_btn_url
-		);
+			if($image instanceof RedirectResponse) {
+				return $image;
+			}
+
+			$featuredItems->setSliderSecondFeatured(
+				$request->title, 
+				$image, 
+				$request->has("show_action_btn"), 
+				$request->action_btn_text, 
+				$request->action_btn_url
+			);
+				
+		}
 		
 		return redirect()->back()->with("success", true);
+
 	}
 
 

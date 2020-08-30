@@ -12,83 +12,95 @@
 */
 
 
-/**
- * Auth routes
- */
-Route::get('admin/login', 'Admin\Auth\LoginController@showLoginForm')->name('admin.login');
-Route::post('admin/login', 'Admin\Auth\LoginController@login');
-Route::post('admin/logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
 
 
-/**
- * Home
- */
-Route::get("admin", "Admin\HomeController@index")->name("admin.home");
+Route::namespace('Admin')->prefix('admin9eUHt3J')->group(function() {
 
 
-/**
- * Account
- */
-Route::get("admin/cuenta", "Admin\AccountController@showForm")->name("admin.account");
-Route::post("admin/cuenta", "Admin\AccountController@updateAccount");
+	/**
+	 * Auth routes
+	 */
+	Route::get('login', 'Auth\LoginController@showLoginForm')->name('admin.login');
+	Route::post('login', 'Auth\LoginController@login');
+	Route::post('logout', 'Auth\LoginController@logout')->name('admin.logout');
 
 
-/**
- * Cover pages
- */
-Route::get("admin/portadas", "Admin\CoverImagesController@showOverview")->name("admin.covers.overview");
-
-Route::get("admin/portadas/navbar", "Admin\CoverImagesController@showNavbarFeaturedForm")->name("admin.covers.navbarfeatured");
-Route::post("admin/portadas/navbar", "Admin\CoverImagesController@changeNavbarFeatured");
-
-Route::get("admin/portadas/slider1", "Admin\CoverImagesController@showSliderOneFeaturedForm")->name("admin.covers.slider1featured");
-Route::post("admin/portadas/slider1", "Admin\CoverImagesController@changeSliderOneFeatured");
-
-Route::get("admin/portadas/slider2", "Admin\CoverImagesController@showSliderTwoFeaturedForm")->name("admin.covers.slider2featured");
-Route::post("admin/portadas/slider2", "Admin\CoverImagesController@changeSliderTwoFeatured");
-
-Route::get("admin/portadas/item-slider/agregar", "Admin\CoverImagesController@showAddCarouselItemForm")->name("admin.covers.carouselitem.create");
-Route::post("admin/portadas/item-slider/agregar", "Admin\CoverImagesController@addCarouselItem");
-Route::post("admin/portadas/item-slider/eliminar/{id}", "Admin\CoverImagesController@deleteCarouselItem")->name("admin.covers.carouselitem.delete");
-Route::get("admin/portadas/item-slider/editar/{id}", "Admin\CoverImagesController@showCarouselItemEditForm")->name("admin.covers.carouselitem.edit");
-Route::post("admin/portadas/item-slider/editar/{id}", "Admin\CoverImagesController@editCarouselItem");
+	/**
+	 * Home
+	 */
+	Route::get("/", "HomeController@index")->name("admin.home");
 
 
-Route::get("admin/portadas/obtener_productos", "Admin\CoverImagesController@fetchProducts");
+	/**
+	 * Account
+	 */
+	Route::get("cuenta", "AccountController@showForm")->name("admin.account");
+	Route::post("cuenta", "AccountController@updateAccount");
+
+
+	/**
+	 * Cover pages
+	 */
+	Route::get("portadas", "CoverImagesController@showOverview")->name("admin.covers.overview");
+
+	Route::get("portadas/navbar", "CoverImagesController@showNavbarFeaturedForm")->name("admin.covers.navbarfeatured");
+	Route::post("portadas/navbar", "CoverImagesController@changeNavbarFeatured");
+
+	Route::get("portadas/slider1", "CoverImagesController@showSliderOneFeaturedForm")->name("admin.covers.slider1featured");
+	Route::post("portadas/slider1", "CoverImagesController@changeSliderOneFeatured");
+
+	Route::get("portadas/slider2", "CoverImagesController@showSliderTwoFeaturedForm")->name("admin.covers.slider2featured");
+	Route::post("portadas/slider2", "CoverImagesController@changeSliderTwoFeatured");
+
+	Route::get("portadas/item-slider/agregar", "CoverImagesController@showAddCarouselItemForm")->name("admin.covers.carouselitem.create");
+	Route::post("portadas/item-slider/agregar", "CoverImagesController@addCarouselItem");
+	Route::post("portadas/item-slider/eliminar/{id}", "CoverImagesController@deleteCarouselItem")->name("admin.covers.carouselitem.delete");
+	Route::get("portadas/item-slider/editar/{id}", "CoverImagesController@showCarouselItemEditForm")->name("admin.covers.carouselitem.edit");
+	Route::post("portadas/item-slider/editar/{id}", "CoverImagesController@editCarouselItem");
+
+
+	Route::get("portadas/obtener_productos", "CoverImagesController@fetchProducts")->name("admin.covers.fetch-products");
+
+
+	/**
+	 * Products
+	 */
+	Route::get("productos", "ProductsController@list")->name("admin.products.list");
+	Route::get("productos/crear", "ProductsController@showCreateForm")->name("admin.products.create");
+	Route::post("productos/crear", "ProductsController@create");
+	Route::get("productos/{id}", "ProductsController@details")->name("admin.products.details");
+	Route::post("productos/subir-imagen", "ProductsController@uploadImage");
+	Route::post("productos/eliminar-imagen", "ProductsController@deleteImage");
+	Route::post("productos/{id}/modificar", "ProductsController@update");
+	Route::post("productos/{id}/eliminar", "ProductsController@delete");
+
+
+	/**
+	 * Categories
+	 */
+	Route::get("categorias", "CategoriesController@list")->name("admin.categories.list");
+	Route::post("categorias/crear", "CategoriesController@create");
+	Route::post("categorias/reordenar", "CategoriesController@reorderCategories");
+	Route::get("categorias/{id}", "CategoriesController@details")->name("admin.categories.details");
+	Route::post("categorias/{id}/modificar", "CategoriesController@update");
+	Route::post("categorias/{id}/eliminar", "CategoriesController@delete");
+
+
+	/**
+	 * Subcategories
+	 */
+	Route::post("subcategorias/crear", "SubcategoriesController@create");
+	Route::post("subcategorias/reordenar", "SubcategoriesController@reorder");
+	Route::get("subcategorias/{id}", "SubcategoriesController@details")->name("admin.subcategories.details");
+	Route::post("subcategorias/{id}/modificar", "SubcategoriesController@update");
+	Route::post("subcategorias/{id}/eliminar", "SubcategoriesController@delete");
+
+	
+
+});
 
 
 
 
-/**
- * Products
- */
-Route::get("admin/productos", "Admin\ProductsController@list")->name("admin.products.list");
-Route::get("admin/productos/crear", "Admin\ProductsController@showCreateForm")->name("admin.products.create");
-Route::post("admin/productos/crear", "Admin\ProductsController@create");
-Route::get("admin/productos/{id}", "Admin\ProductsController@details")->name("admin.products.details");
-Route::post("admin/productos/subir-imagen", "Admin\ProductsController@uploadImage");
-Route::post("admin/productos/eliminar-imagen", "Admin\ProductsController@deleteImage");
-Route::post("admin/productos/{id}/modificar", "Admin\ProductsController@update");
-Route::post("admin/productos/{id}/eliminar", "Admin\ProductsController@delete");
 
-
-/**
- * Categories
- */
-Route::get("admin/categorias", "Admin\CategoriesController@list")->name("admin.categories.list");
-Route::post("admin/categorias/crear", "Admin\CategoriesController@create");
-Route::post("admin/categorias/reordenar", "Admin\CategoriesController@reorderCategories");
-Route::get("admin/categorias/{id}", "Admin\CategoriesController@details")->name("admin.categories.details");
-Route::post("admin/categorias/{id}/modificar", "Admin\CategoriesController@update");
-Route::post("admin/categorias/{id}/eliminar", "Admin\CategoriesController@delete");
-
-
-/**
- * Subcategories
- */
-Route::post("admin/subcategorias/crear", "Admin\SubcategoriesController@create");
-Route::post("admin/subcategorias/reordenar", "Admin\SubcategoriesController@reorder");
-Route::get("admin/subcategorias/{id}", "Admin\SubcategoriesController@details")->name("admin.subcategories.details");
-Route::post("admin/subcategorias/{id}/modificar", "Admin\SubcategoriesController@update");
-Route::post("admin/subcategorias/{id}/eliminar", "Admin\SubcategoriesController@delete");
 

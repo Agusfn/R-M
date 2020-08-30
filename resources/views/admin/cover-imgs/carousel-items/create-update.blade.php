@@ -174,7 +174,7 @@
 
 @section('custom-js')
 <script type="text/javascript">
-	var productFetchResUrl = "{{ url('admin/portadas/obtener_productos') }}";
+	var productFetchResUrl = "{{ route('admin.covers.fetch-products') }}";
 	var storageUrl = "{{ Storage::url('') }}";
 </script>
 <script type="text/javascript" src="{{ asset('resources/admin/scripts/product_picker.js') }}"></script>

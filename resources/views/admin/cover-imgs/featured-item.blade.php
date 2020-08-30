@@ -50,31 +50,29 @@
 		<button class="btn btn-default" id="btn_load_product_data" style="margin-bottom: 20px">Cargar desde producto</button>
 
 
-		<form id="featured_item_form" 
-
 		@if($featuredType == 'navbar')
-			action="{{ route('admin.covers.navbarfeatured') }}" 
+			@php($action = route('admin.covers.navbarfeatured')) 
 		@elseif($featuredType == 'slider1')
-			action="{{ route('admin.covers.slider1featured') }}"  
-		@elseif($featuredType == 'slider1')
-			action="{{ route('admin.covers.slider2featured') }}" 
+			@php($action = route('admin.covers.slider1featured')) 
+		@elseif($featuredType == 'slider2')
+			@php($action = route('admin.covers.slider2featured')) 
 		@endif
-		method="POST" enctype="multipart/form-data">
+
+		<form id="featured_item_form" action="{{ $action }}" method="POST" enctype="multipart/form-data">
 
 			@csrf
 
-			@if($featuredType == 'navbar')
 			<label class="fancy-radio">
 				<input name="mostrar_item" value="no" type="radio" @if(!$featuredItem) checked @endif autocomplete="off">
 				<span><i></i>No mostrar nada</span>
 			</label>
 
+			<hr>
 
 			<label class="fancy-radio" style="margin-top: 15px">
 				<input name="mostrar_item" value="si" type="radio" @if($featuredItem || old('mostrar_item') == 'si') checked @endif autocomplete="off">
 				<span><i></i>Mostrar ítem destacado</span>
 			</label>
-			@endif
 
 			<div class="form-group @if($errors->has('title')) has-error @endif">
 				<label>Título</label>
@@ -179,7 +177,7 @@
 
 @section('custom-js')
 <script type="text/javascript">
-	var productFetchResUrl = "{{ url('admin/portadas/obtener_productos') }}";
+	var productFetchResUrl = "{{ route('admin.covers.fetch-products') }}";
 	var storageUrl = "{{ Storage::url('') }}";
 </script>
 <script type="text/javascript" src="{{ asset('resources/admin/scripts/product_picker.js') }}"></script>
@@ -252,17 +250,13 @@ $(document).ready(function() {
 	});
 
 
-	@if($featuredType == 'navbar' && (!$featuredItem))
 	$("input[name=mostrar_item]:checked").trigger("change");
-	@else
-	if($("#img_area").is(":visible")) {
-		$("input[name=image_type]:checked").trigger("change");
-	}
-	@endif
-	@if($actionBtnChecked)
-	$("input[name=show_action_btn]").trigger("change");
-	@endif
+	$("input[name=image_type]:checked").trigger("change");
 
+
+	@if($actionBtnChecked)
+		$("input[name=show_action_btn]").trigger("change");
+	@endif
 
 
 });

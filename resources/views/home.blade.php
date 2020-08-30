@@ -20,7 +20,11 @@
         <div class="row"> 
           
           <!-- Main Slider  -->
+          @if(!$featuredItems->sliderFirstFeatured && !$featuredItems->sliderSecondFeatured)
+          <div class="col-md-12 no-padding"> 
+          @else
           <div class="col-md-9 no-padding"> 
+          @endif
             
             <!-- Main Slider Start -->
             <div class="tp-banner-container">
@@ -87,10 +91,12 @@
             </div>
           </div>
           
+          @if($featuredItems->sliderFirstFeatured || $featuredItems->sliderSecondFeatured)
           <!-- Main Slider  -->
           <div class="col-md-3 no-padding"> 
             
             @php($firstFeatured = $featuredItems->sliderFirstFeatured)
+
             @if($firstFeatured)
             <div class="week-sale-bnr" style="background-image: url({{ $firstFeatured->imgUrl() }});background-size: cover;">
               <div class="layer"></div>
@@ -107,6 +113,7 @@
             @endif
 
             @php($secondFeatured = $featuredItems->sliderSecondFeatured)
+            
             @if($secondFeatured)
             <div class="week-sale-bnr" style="background-image: url({{ $secondFeatured->imgUrl() }});background-size: cover;">
 
@@ -122,6 +129,8 @@
             @endif
 
           </div>
+          @endif
+
         </div>
       </div>
     </div>
