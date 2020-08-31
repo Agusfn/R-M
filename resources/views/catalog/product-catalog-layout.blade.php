@@ -1,51 +1,48 @@
 @extends('layouts.main')
 
 
-@section('meta')
+@if(request()->q)
+
+  @section('title', 'Buscar '.request()->q)
+  @php($description = 'Buscar "'.request()->q.'" en el sitio.')
+
+@elseif(isset($subcategoryFiltered))
+
+  @section('title', $categoryFiltered->name.' - '.$subcategoryFiltered->name)
+  @php($description = $categoryFiltered->name . ' - ' . $subcategoryFiltered->name.'. Catálogo de productos de '.$categoryFiltered->name)
+
+@elseif(isset($categoryFiltered))
+
+  @section('title', $categoryFiltered->name)
   
-  @if(request()->q)
+  @php($description = 'Catálogo de productos de '.$categoryFiltered->name.': ')
 
-    @php($description = 'Buscar "'.request()->q.'" en el sitio.')
+  @foreach($categoryFiltered->subcategories as $subcategory)
+    @php($description .= $subcategory->name)
+    @if(!$loop->last)
+      @php($description .= ', ')
+    @endif
+  @endforeach
 
-  @elseif(isset($subcategoryFiltered))
+@else
 
-    @php($description = $categoryFiltered->name . ' - ' . $subcategoryFiltered->name.'. Catálogo de productos de '.$categoryFiltered->name)
+  @section('title', 'Todos los productos')
+  @php($description = 'Catálogo de todos los productos.')
 
-  @elseif(isset($categoryFiltered))
-    
-    @php($description = 'Catálogo de productos de '.$categoryFiltered->name.' - ')
-    
-    @foreach($categoryFiltered->subcategories as $subcategory)
-      @php($description .= $subcategory->name)
-      @if(!$loop->last)
-        @php($description .= ', ')
-      @endif
-    @endforeach
+@endif
 
-  @endif
 
+@section('meta')
 <meta name="description" content="{{ $description }}">
 <meta property="og:description" content="{{ $description }}" />
 
 <meta property="og:image" content="{{ asset('resources/images/logo-grande.jpg') }}" />
 <meta property="og:type" content="website" /> 
-
 @endsection
 
 
-@if(request()->q)
-  @section('title', 'Buscar '.request()->q)
-@elseif(isset($subcategoryFiltered))
-  @section('title', $categoryFiltered->name.' - '.$subcategoryFiltered->name)
-@elseif(isset($categoryFiltered))
-  @section('title', $categoryFiltered->name)
-@else
-  @section('title', 'Todos los productos')
-@endif
-
 
 @section('content')
-
 
   <!-- Linking -->
   <div class="linking">
