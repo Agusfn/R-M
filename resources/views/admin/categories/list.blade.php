@@ -66,7 +66,7 @@
 						</div>
 					</div>
 
-					<form action="{{ url('admin/categorias/reordenar') }}" method="POST" id="reorder_categories_form">
+					<form action="{{ route('admin.categories.reorder') }}" method="POST" id="reorder_categories_form">
 						@csrf
 						<input type="hidden" name="ordered_categories_json">
 					</form>
@@ -83,7 +83,7 @@
 						<h4 class="modal-title" id="myModalLabel">Agregar nueva categoría</h4>
 					</div>
 					<div class="modal-body">
-						<form action="{{ url('admin/categorias/crear') }}" method="POST" style="max-width: 300px;margin: 0 auto;">
+						<form action="{{ route('admin.categories.create') }}" method="POST" style="max-width: 300px;margin: 0 auto;">
 							@csrf
 							<div class="form-group @if($errors->create_category->has('name')) has-error @endif">
 								<label>Nombre categoría:</label>

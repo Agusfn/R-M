@@ -25,7 +25,7 @@
 							<h3 class="panel-title">
 								Detalles de subcategoría
 								<div class="btn-group" style="float:right">
-									<form action="{{ url('admin/subcategorias/'.$subcategory->id.'/eliminar') }}" method="POST">
+									<form action="{{ route('admin.subcategories.delete', $subcategory->id) }}" method="POST">
 										@csrf
 										<button type="button" class="btn btn-danger" onclick="if(confirm('¿Eliminar?')) $(this).parent().submit();">Eliminar subcategoría</button>
 									</form>								
@@ -34,7 +34,7 @@
 						</div>
 						<div class="panel-body">
 							
-							<form action="{{ url('admin/subcategorias/'.$subcategory->id.'/modificar') }}" method="POST">
+							<form action="{{ route('admin.subcategories.update', $subcategory->id) }}" method="POST">
 								@csrf
 								<div class="row">
 									<div class="col-sm-4">

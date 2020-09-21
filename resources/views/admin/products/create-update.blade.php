@@ -47,7 +47,7 @@
 								Modificar producto
 								<div class="btn-group" style="float:right">
 									<a class="btn btn-info" href="{{ $product->url() }}" target="_blank">Ver en sitio web <span class="glyphicon glyphicon-globe"></span></a>&nbsp;
-									<form action="{{ url('admin/productos/'.$product->id.'/eliminar') }}" method="POST" style="display: inline-block;">
+									<form action="{{ route('admin.products.delete', $product->id) }}" method="POST" style="display: inline-block;">
 										@csrf
 										<button type="button" class="btn btn-danger" onclick="if(confirm('¿Eliminar producto?')) $(this).parent().submit();">Eliminar producto</button>
 									</form>
@@ -63,7 +63,7 @@
 								<div class="col-md-6">
 
 									@if(isset($product))
-									<form action="{{ url('admin/productos/'.$product->id.'/modificar') }}" method="POST" id="product_form">
+									<form action="{{ route('admin.products.update', $product->id) }}" method="POST" id="product_form">
 									@else
 									<form action="{{ route('admin.products.create') }}" method="POST" id="product_form">
 									@endif
@@ -144,7 +144,7 @@
 									<div class="form-group">
 										<label>Imágenes del producto</label>
 										
-										<form action="{{ url('admin/productos/subir-imagen') }}" method="POST" enctype="multipart/form-data" class="dropzone" id="img_dropzone">
+										<form action="{{ route('admin.products.upload-image') }}" method="POST" enctype="multipart/form-data" class="dropzone" id="img_dropzone">
 											@csrf
 										</form>
 
@@ -236,7 +236,7 @@
 				
 				$.ajax({
 					type: "POST",
-					url: app_url + "/admin/productos/eliminar-imagen",
+					url: "{{ route('admin.products.delete-image') }}",
 					headers: {
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				    },

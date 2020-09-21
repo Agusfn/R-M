@@ -43,7 +43,7 @@
 							<h3 class="panel-title">
 								Detalles de categoría
 								<div class="btn-group" style="float:right">
-									<form action="{{ url('admin/categorias/'.$category->id.'/eliminar') }}" method="POST">
+									<form action="{{ route('admin.categories.delete', $category->id) }}" method="POST">
 										@csrf
 										<button type="button" class="btn btn-danger" onclick="if(confirm('¿Eliminar?')) $(this).parent().submit();">Eliminar categoría</button>
 									</form>
@@ -52,7 +52,7 @@
 						</div>
 						<div class="panel-body">
 							
-							<form action="{{ url('admin/categorias/'.$category->id.'/modificar') }}" method="POST">
+							<form action="{{ route('admin.categories.update', $category->id) }}" method="POST">
 								@csrf
 								<div class="row">
 									<div class="col-sm-4">
@@ -129,7 +129,7 @@
 						</div>
 					</div>
 
-					<form action="{{ url('admin/subcategorias/reordenar') }}" method="POST" id="reorder_subcategories_form">
+					<form action="{{ route('admin.subcategories.reorder') }}" method="POST" id="reorder_subcategories_form">
 						@csrf
 						<input type="hidden" name="ordered_subcategories_json">
 					</form>
@@ -149,7 +149,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<form action="{{ url('admin/subcategorias/crear') }}" method="POST" style="max-width: 300px;margin: 0 auto;">
+						<form action="{{ route('admin.subcategories.create') }}" method="POST" style="max-width: 300px;margin: 0 auto;">
 							@csrf
 							<input type="hidden" name="category_id" value="{{ $category->id }}">
 							<div class="form-group @if($errors->create_subcategory->has('subcategory_name')) has-error @endif">
